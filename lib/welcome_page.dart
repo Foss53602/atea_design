@@ -37,6 +37,7 @@ class _WelcomePageState extends State<WelcomePage> {
                   Text(
                     'عطية',
                     style: TextStyle(
+                        fontWeight: FontWeight.bold,
                         fontSize: 43.0,
                         color: Theme.of(context).colorScheme.primary),
                   ),
@@ -51,16 +52,22 @@ class _WelcomePageState extends State<WelcomePage> {
                       animatedTexts: [
                         RotateAnimatedText('تســوق',
                             textStyle: TextStyle(
-                                color:
-                                    Theme.of(context).colorScheme.onBackground)),
+                                fontWeight: FontWeight.bold,
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .onBackground)),
                         RotateAnimatedText('تــجهيز',
                             textStyle: TextStyle(
-                                color:
-                                    Theme.of(context).colorScheme.onBackground)),
+                                fontWeight: FontWeight.bold,
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .onBackground)),
                         RotateAnimatedText('اسـتلام',
                             textStyle: TextStyle(
-                                color:
-                                    Theme.of(context).colorScheme.onBackground)),
+                                fontWeight: FontWeight.bold,
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .onBackground)),
                       ],
                     ),
                   ),
@@ -73,9 +80,9 @@ class _WelcomePageState extends State<WelcomePage> {
                   gradient: LinearGradient(
                 colors: [
                   Theme.of(context).colorScheme.primary,
-                  Theme.of(context).colorScheme.tertiary,
+                  Theme.of(context).colorScheme.primary.withOpacity(0.8),
                   Theme.of(context).colorScheme.primary.withOpacity(0.3),
-                  Theme.of(context).colorScheme.tertiary,
+                  Theme.of(context).colorScheme.primary.withOpacity(0.8),
                   Theme.of(context).colorScheme.primary,
                 ],
               )),
@@ -116,7 +123,11 @@ class _WelcomePageState extends State<WelcomePage> {
               margin: EdgeInsets.all(16),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(ThemeConfig.radius16),
-                  color: Theme.of(context).colorScheme.primary.withOpacity(0.2)),
+                  border: Border.all(
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                  color:
+                      Theme.of(context).colorScheme.primary.withOpacity(0.2)),
               child: Column(
                 children: [
                   Align(
@@ -133,8 +144,9 @@ class _WelcomePageState extends State<WelcomePage> {
                             width: 16,
                           ),
                           Text(
-                            'تواصال معنا',
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            'تواصل معنا عبر',
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                         ],
                       ),
@@ -142,25 +154,26 @@ class _WelcomePageState extends State<WelcomePage> {
                     alignment: Alignment.centerRight,
                   ),
                   SizedBox(
-                    height: 16,
+                    height: 32,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       MaterialButton(
                         onPressed: () {},
-                        child:
-                            Image.asset('assets/images/whatsapp.png', height: 60),
+                        elevation: 16,
+                        child: Image.asset('assets/images/whatsapp.png',
+                            height: 60),
                       ),
                       MaterialButton(
                         onPressed: () {},
-                        child:
-                            Image.asset('assets/images/TikTok.png', height: 100),
+                        child: Image.asset('assets/images/TikTok.png',
+                            height: 100),
                       ),
                     ],
                   ),
                   SizedBox(
-                    height: 50,
+                    height: 40,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -172,13 +185,13 @@ class _WelcomePageState extends State<WelcomePage> {
                       ),
                       MaterialButton(
                         onPressed: () {},
-                        child:
-                            Image.asset('assets/images/facebook.png', height: 80),
+                        child: Image.asset('assets/images/facebook.png',
+                            height: 80),
                       ),
                       MaterialButton(
                         onPressed: () {},
-                        child:
-                            Image.asset('assets/images/telegram.png', height: 50),
+                        child: Image.asset('assets/images/telegram.png',
+                            height: 50),
                       ),
                     ],
                   ),

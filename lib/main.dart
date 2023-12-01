@@ -2,7 +2,7 @@ import 'package:atea_design/color_schemes.g.dart';
 import 'package:atea_design/welcome_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-
+BuildContext? testContext;
 void main() {
   runApp(const MyApp());
 }
