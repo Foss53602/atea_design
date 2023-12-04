@@ -31,17 +31,7 @@ class _WelcomePageState extends State<WelcomePage> {
                       child: Image.asset('assets/images/main_logo.jpg'),
                       height: 60,
                       width: 60),
-                  const SizedBox(
-                    width: 20.0,
-                  ),
-                  Text(
-                    'عطية',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 43.0,
-                        color: Theme.of(context).colorScheme.primary),
-                  ),
-                  const SizedBox(width: 20.0),
+                  Spacer(),
                   DefaultTextStyle(
                     style: const TextStyle(
                       fontSize: 40.0,
@@ -50,19 +40,13 @@ class _WelcomePageState extends State<WelcomePage> {
                     child: AnimatedTextKit(
                       repeatForever: true,
                       animatedTexts: [
-                        RotateAnimatedText('تســوق',
+                        RotateAnimatedText('عطيــة الشـيخ',
                             textStyle: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Theme.of(context)
                                     .colorScheme
                                     .onBackground)),
-                        RotateAnimatedText('تــجهيز',
-                            textStyle: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .onBackground)),
-                        RotateAnimatedText('اسـتلام',
+                        RotateAnimatedText('ATIA SAFANUR',
                             textStyle: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Theme.of(context)
@@ -71,6 +55,7 @@ class _WelcomePageState extends State<WelcomePage> {
                       ],
                     ),
                   ),
+                  Spacer(),
                 ],
               ),
             ),
@@ -88,6 +73,29 @@ class _WelcomePageState extends State<WelcomePage> {
               )),
             ),
             Spacer(),
+            SizedBox(
+              height: 16,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Row(
+                children: [
+                  Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: Theme.of(context).colorScheme.secondary),
+                      width: 4,
+                      height: 15),
+                  SizedBox(
+                    width: 8,
+                  ),
+                  Text(
+                    'الإعلانات',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  ),
+                ],
+              ),
+            ),
             SizedBox(
               height: 240,
               child: Swiper(
@@ -118,8 +126,35 @@ class _WelcomePageState extends State<WelcomePage> {
               ),
             ),
             Spacer(),
+            SizedBox(
+              height: 8,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Row(
+                children: [
+                  Container(
+                      decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.circular(ThemeConfig.radius8),
+                          color: Theme.of(context).colorScheme.secondary),
+                      width: 4,
+                      height: 15),
+                  SizedBox(
+                    width: 8,
+                  ),
+                  Text(
+                    'التواصل والمجتمع',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 4,
+            ),
             Container(
-              padding: EdgeInsets.all(16),
+              padding: EdgeInsets.all(8),
               margin: EdgeInsets.all(16),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(ThemeConfig.radius16),
@@ -130,68 +165,71 @@ class _WelcomePageState extends State<WelcomePage> {
                       Theme.of(context).colorScheme.primary.withOpacity(0.2)),
               child: Column(
                 children: [
-                  Align(
-                    child: Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Image.asset(
-                            'assets/images/conversation.png',
-                            height: 50,
-                          ),
-                          SizedBox(
-                            width: 16,
-                          ),
-                          Text(
-                            'تواصل معنا عبر',
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                    ),
-                    alignment: Alignment.centerRight,
-                  ),
-                  SizedBox(
-                    height: 32,
-                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      MaterialButton(
-                        onPressed: () {},
-                        elevation: 16,
-                        child: Image.asset('assets/images/whatsapp.png',
-                            height: 60),
+                      Stack(
+                        children: [
+                          Container(
+                            child: Image.asset('assets/images/border.png'),
+                            height: 130,
+                            width: 130,
+                          ),
+                          Image.asset('assets/images/whatsapp.png', height: 65)
+                        ],
+                        alignment: Alignment.center,
                       ),
-                      MaterialButton(
-                        onPressed: () {},
-                        child: Image.asset('assets/images/TikTok.png',
-                            height: 100),
+                      Stack(
+                        children: [
+                          Container(
+                            child: Image.asset('assets/images/border.png'),
+                            height: 130,
+                            width: 130,
+                          ),
+                          Image.asset('assets/images/TikTok.png', height: 70)
+                        ],
+                        alignment: Alignment.center,
                       ),
                     ],
                   ),
                   SizedBox(
-                    height: 40,
+                    height: 30,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      MaterialButton(
-                        onPressed: () {},
-                        child: Image.asset('assets/images/instagram.png',
-                            height: 55),
+                      Stack(
+                        children: [
+                          Container(
+                            child: Image.asset('assets/images/border.png'),
+                            height: 100,
+                            width: 100,
+                          ),
+                          Image.asset('assets/images/instagram.png', height: 45)
+                        ],
+                        alignment: Alignment.center,
                       ),
-                      MaterialButton(
-                        onPressed: () {},
-                        child: Image.asset('assets/images/facebook.png',
-                            height: 80),
+                      Stack(
+                        children: [
+                          Container(
+                            child: Image.asset('assets/images/border.png'),
+                            height: 100,
+                            width: 100,
+                          ),
+                          Image.asset('assets/images/facebook.png', height: 65)
+                        ],
+                        alignment: Alignment.center,
                       ),
-                      MaterialButton(
-                        onPressed: () {},
-                        child: Image.asset('assets/images/telegram.png',
-                            height: 50),
+                      Stack(
+                        children: [
+                          Container(
+                            child: Image.asset('assets/images/border.png'),
+                            height: 100,
+                            width: 100,
+                          ),
+                          Image.asset('assets/images/telegram.png', height: 40)
+                        ],
+                        alignment: Alignment.center,
                       ),
                     ],
                   ),
@@ -201,6 +239,7 @@ class _WelcomePageState extends State<WelcomePage> {
             Spacer(),
             SizedBox(
               width: 300,
+              height: 50,
               child: FilledButton.icon(
                   onPressed: () {
                     Navigator.push(context,
@@ -208,12 +247,14 @@ class _WelcomePageState extends State<WelcomePage> {
                       return HomePage();
                     }));
                   },
+                  style: ButtonStyle(
+                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.circular(ThemeConfig.radius8)))),
                   icon: Icon(Icons.login),
                   label: Text('تسجيل الدخول')),
             ),
-            SizedBox(
-              height: 16,
-            )
+            Spacer()
           ],
         ),
       ),
