@@ -701,7 +701,9 @@ class _HomeState extends State<Home> {
                                       fit: StackFit.expand,
                                       children: [
                                         Image.network(
-                                          products[i],
+                                          i == 1
+                                              ? 'https://s1.eestatic.com/2018/09/13/elandroidelibre/el_androide_libre_337730763_179714641_1706x960.jpg'
+                                              : products[i],
                                           fit: BoxFit.cover,
                                         ),
                                         Positioned(
@@ -851,7 +853,9 @@ class _HomeState extends State<Home> {
                                       children: [
                                         Positioned.fill(
                                           child: Image.network(
-                                            products[products.length - 1 - i],
+                                            i == 4
+                                                ? 'https://s1.eestatic.com/2018/09/13/elandroidelibre/el_androide_libre_337730763_179714641_1706x960.jpg'
+                                            :products[products.length - 1 - i],
                                             fit: BoxFit.cover,
                                           ),
                                         ),
