@@ -100,8 +100,7 @@ class _ProductPageState extends State<ProductPage> {
                   )
                 ],
               ),
-              Expanded(
-                  child: Stack(
+              Stack(
                 children: [
                   Positioned(
                     top: 0,
@@ -326,7 +325,7 @@ class _ProductPageState extends State<ProductPage> {
                     ),
                   ),
                 ],
-              )),
+              ),
               SizedBox(
                 height: 100,
               ),
@@ -339,6 +338,16 @@ class _ProductPageState extends State<ProductPage> {
             child: Container(
               decoration: BoxDecoration(
                   color: Theme.of(context).colorScheme.onPrimary,
+                  boxShadow: [
+                    BoxShadow(
+                        color: Theme.of(context)
+                            .colorScheme
+                            .primary
+                            .withOpacity(0.2),
+                        blurRadius: 10,
+                        spreadRadius: 1,
+                        offset: Offset(0, 0))
+                  ],
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(ThemeConfig.radius32),
                       topRight: Radius.circular(ThemeConfig.radius32))),
@@ -418,7 +427,7 @@ class _ProductPageState extends State<ProductPage> {
                         borderRadius:
                             BorderRadius.circular(ThemeConfig.radius16),
                         border: Border.all(
-                            color: Theme.of(context).colorScheme.primary,
+                            color: Theme.of(context).colorScheme.secondary,
                             width: 0.5)),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -434,7 +443,7 @@ class _ProductPageState extends State<ProductPage> {
                           },
                           child: Icon(
                             Icons.add_circle_outline,
-                            color: Theme.of(context).colorScheme.primary,
+                            color: Theme.of(context).colorScheme.secondary,
                           ),
                         ),
                         const SizedBox(
@@ -443,8 +452,8 @@ class _ProductPageState extends State<ProductPage> {
                         Text(
                           count.toString(),
                           style: TextStyle(
-                              color: Theme.of(context).colorScheme.primary,
-                              fontWeight: FontWeight.bold),
+                              color: Theme.of(context).colorScheme.secondary,
+                              fontSize: 18),
                         ),
                         const SizedBox(
                           width: 16,
@@ -459,7 +468,7 @@ class _ProductPageState extends State<ProductPage> {
                           },
                           child: Icon(
                             Icons.remove_circle_outline,
-                            color: Theme.of(context).colorScheme.primary,
+                            color: Theme.of(context).colorScheme.secondary,
                           ),
                         ),
                         const SizedBox(
