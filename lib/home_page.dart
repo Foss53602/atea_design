@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:atea_design/materials_page.dart';
+import 'package:atea_design/product_page.dart';
 import 'package:atea_design/theme_config.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
@@ -60,22 +61,22 @@ class _HomePageState extends State<HomePage> {
                 'assets/images/home.png',
                 width: 20,
                 color: _currentIndex == 0
-                    ? Theme.of(context).colorScheme.secondary
+                    ? Colors.black
                     : Theme.of(context).colorScheme.onBackground,
               ),
               title: Text("الرئيسية"),
-              selectedColor: Theme.of(context).colorScheme.secondary,
+              selectedColor: Colors.black,
             ),
             SalomonBottomBarItem(
               icon: Image.asset(
                 'assets/images/crown.png',
                 width: 26,
                 color: _currentIndex == 1
-                    ? null
+                    ? Colors.amber
                     : Theme.of(context).colorScheme.onBackground,
               ),
               title: Text("المفضلة"),
-              selectedColor: Colors.amber,
+              selectedColor: Theme.of(context).colorScheme.secondary,
             ),
 
             /// Search
@@ -95,7 +96,7 @@ class _HomePageState extends State<HomePage> {
             SalomonBottomBarItem(
               icon: Icon(Icons.notifications),
               title: Text("الإشعارات"),
-              selectedColor: Colors.green,
+              selectedColor: Colors.red,
             ),
           ],
         ),
@@ -515,470 +516,552 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(ThemeConfig.pagePadding),
-      child: Column(
-        children: [
-          const SizedBox(
-            height: 35,
-          ),
-          Padding(
-            padding: EdgeInsets.only(top: 8, bottom: 8),
-            child: Row(
-              children: [
-                CircleAvatar(
-                  radius: 22,
-                  backgroundImage: NetworkImage(
-                    'https://d3r4f9ursifuvh.cloudfront.net/cms/images/marketing-manager/og/Junger_Mann_im_Anzug_im_B%C3%BCro.jpg',
+    return Material(
+      child: Padding(
+        padding: EdgeInsets.all(ThemeConfig.pagePadding),
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 35,
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 8, bottom: 8),
+              child: Row(
+                children: [
+                  CircleAvatar(
+                    radius: 22,
+                    backgroundImage: NetworkImage(
+                      'https://d3r4f9ursifuvh.cloudfront.net/cms/images/marketing-manager/og/Junger_Mann_im_Anzug_im_B%C3%BCro.jpg',
+                    ),
                   ),
-                ),
-                Spacer(),
-                Text('الرئيسية',
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                Spacer(),
-                Stack(
-                  clipBehavior: Clip.none,
-                  children: [
-                    Image.asset('assets/images/cart.png', height: 28),
-                    Positioned(
-                      top: -10,
-                      right: -10,
-                      child: Container(
-                        padding: EdgeInsets.all(2),
-                        child: Text('26',
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 10)),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.red,
+                  Spacer(),
+                  Text('الرئيسية',
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                  Spacer(),
+                  Stack(
+                    clipBehavior: Clip.none,
+                    children: [
+                      Image.asset('assets/images/cart.png', height: 28),
+                      Positioned(
+                        top: -10,
+                        right: -10,
+                        child: Container(
+                          padding: EdgeInsets.all(2),
+                          child: Text('26',
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 10)),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.red,
+                          ),
                         ),
-                      ),
-                    )
-                  ],
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            Row(
+              children: [
+                Container(
+                  width: 45,
+                  padding: EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                      color: Theme.of(context)
+                          .colorScheme
+                          .primary
+                          .withOpacity(0.8),
+                      borderRadius:
+                          BorderRadius.circular(ThemeConfig.radius16)),
+                  child: Image.asset('assets/images/filter.png',
+                      height: 20,
+                      width: 20,
+                      color: Theme.of(context).colorScheme.onPrimary),
+                ),
+                SizedBox(
+                  width: 8,
+                ),
+                Expanded(
+                  child: TextField(
+                    decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Theme.of(context).colorScheme.onPrimary,
+                        isDense: true,
+                        contentPadding: EdgeInsets.all(8),
+                        suffixIcon: Icon(OctIcons.search_16),
+                        hintText: 'بحث..',
+                        border: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius:
+                                BorderRadius.circular(ThemeConfig.radius16))),
+                  ),
                 ),
               ],
             ),
-          ),
-          SizedBox(
-            height: 8,
-          ),
-          Row(
-            children: [
-              Container(
-                width: 45,
-                padding: EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                    color:
-                        Theme.of(context).colorScheme.primary.withOpacity(0.8),
-                    borderRadius: BorderRadius.circular(ThemeConfig.radius16)),
-                child: Image.asset('assets/images/filter.png',
-                    height: 20,
-                    width: 20,
-                    color: Theme.of(context).colorScheme.onPrimary),
-              ),
-              SizedBox(
-                width: 8,
-              ),
-              Expanded(
-                child: TextField(
-                  decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Theme.of(context).colorScheme.onPrimary,
-                      isDense: true,
-                      contentPadding: EdgeInsets.all(8),
-                      suffixIcon: Icon(OctIcons.search_16),
-                      hintText: 'بحث..',
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius:
-                              BorderRadius.circular(ThemeConfig.radius16))),
-                ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 16,
-          ),
-          Expanded(
-              child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Container(
-                        decoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.circular(ThemeConfig.radius8),
-                            color: Theme.of(context).colorScheme.secondary),
-                        width: 4,
-                        height: 15),
-                    SizedBox(
-                      width: 8,
-                    ),
-                    Text('الأصناف',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 16)),
-                    Spacer(),
-                    TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        'عرض الكل',
-                        style: TextStyle(fontSize: 12),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                    height: 175,
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            for (var i = 0; i < 4; i++) getCategory(i)
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            for (var i = 1; i < 5; i++) getCategory(i + 3)
-                          ],
-                        ),
-                      ],
-                    )),
-                Row(
-                  children: [
-                    Container(
-                        decoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.circular(ThemeConfig.radius8),
-                            color: Theme.of(context).colorScheme.secondary),
-                        width: 4,
-                        height: 15),
-                    SizedBox(
-                      width: 8,
-                    ),
-                    Text('المواد',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 16)),
-                    Spacer(),
-                    TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        'عرض الكل',
-                        style: TextStyle(fontSize: 12),
-                      ),
-                    ),
-                  ],
-                ),
-                for (var i = 0; i < products.length / 2; i++)
+            SizedBox(
+              height: 16,
+            ),
+            Expanded(
+                child: SingleChildScrollView(
+              child: Column(
+                children: [
                   Row(
                     children: [
-                      Expanded(
-                        child: Container(
-                          clipBehavior: Clip.antiAlias,
-                          height: 275,
-                          margin: EdgeInsets.all(8),
+                      Container(
                           decoration: BoxDecoration(
                               borderRadius:
                                   BorderRadius.circular(ThemeConfig.radius8),
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .primary
-                                  .withOpacity(0.2)),
-                          child: Column(
-                            children: [
-                              Expanded(
-                                  flex: 2,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(
-                                            ThemeConfig.radius8),
-                                        topRight: Radius.circular(
-                                            ThemeConfig.radius8)),
-                                    child: Stack(
-                                      fit: StackFit.expand,
-                                      children: [
-                                        Image.network(
-                                          i == 1
-                                              ? 'https://s1.eestatic.com/2018/09/13/elandroidelibre/el_androide_libre_337730763_179714641_1706x960.jpg'
-                                              : products[i],
-                                          fit: BoxFit.cover,
-                                        ),
-                                        Positioned(
-                                            top: 8,
-                                            left: 8,
-                                            child: Container(
-                                              padding: EdgeInsets.all(4),
-                                              decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      color: Theme.of(context)
-                                                          .colorScheme
-                                                          .secondary,
-                                                      width: 0.5),
-                                                  color: i % 3 != 0
-                                                      ? Theme.of(context)
-                                                          .colorScheme
-                                                          .secondary
-                                                          .withOpacity(0.8)
-                                                      : Theme.of(context)
-                                                          .colorScheme
-                                                          .secondary
-                                                          .withOpacity(0.6),
-                                                  shape: BoxShape.circle),
-                                              child: InkWell(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        ThemeConfig.radius16),
-                                                child: i % 3 == 0
-                                                    ? Image.asset(
-                                                        'assets/images/crown_outline.png',
-                                                        color: Theme.of(context)
-                                                            .colorScheme
-                                                            .onPrimary,
-                                                        height: 22,
-                                                      )
-                                                    : Image.asset(
-                                                        'assets/images/crown.png',
-                                                        height: 22,
-                                                      ),
-                                              ),
-                                            ))
-                                      ],
-                                    ),
-                                  )),
-                              Expanded(
-                                child: Stack(
-                                  children: [
-                                    Transform.translate(
-                                      offset: Offset(0, -8),
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .onPrimary,
-                                            borderRadius: BorderRadius.circular(
-                                                ThemeConfig.radius8)),
-                                      ),
-                                    ),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .onPrimary,
-                                          borderRadius: BorderRadius.circular(
-                                              ThemeConfig.radius8)),
-                                      child: Row(
-                                        children: [
-                                          SizedBox(
-                                            width: 8,
-                                          ),
-                                          Expanded(
-                                            child: Column(
-                                              children: [
-                                                Text(
-                                                  'اسم المادة',
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    if (i % 2 == 0)
-                                                      Text(
-                                                          '${i == 0 ? 18 : i * Random().nextInt(100)} \$',
-                                                          style: TextStyle(
-                                                            decoration:
-                                                                TextDecoration
-                                                                    .lineThrough,
-                                                          )),
-                                                    SizedBox(
-                                                      width: 8,
-                                                    ),
-                                                    Text(
-                                                        '${i == 0 ? 15 : i * Random().nextInt(100)} \$',
-                                                        style: TextStyle(
-                                                            fontSize: 16,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold)),
-                                                  ],
-                                                ),
-                                                TextButton.icon(
-                                                  icon: Image.asset(
-                                                    'assets/images/add_to_cart.png',
-                                                    width: 22,
-                                                  ),
-                                                  onPressed: () {},
-                                                  label: Text('أضف إلى السلة'),
-                                                )
-                                              ],
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
+                              color: Theme.of(context).colorScheme.secondary),
+                          width: 4,
+                          height: 15),
+                      SizedBox(
+                        width: 8,
                       ),
-                      Expanded(
-                        child: Container(
-                          clipBehavior: Clip.antiAlias,
-                          height: 275,
-                          margin: EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.circular(ThemeConfig.radius8),
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .primary
-                                  .withOpacity(0.2)),
-                          child: Column(
-                            children: [
-                              Expanded(
-                                  flex: 2,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(
-                                            ThemeConfig.radius8),
-                                        topRight: Radius.circular(
-                                            ThemeConfig.radius8)),
-                                    child: Stack(
-                                      children: [
-                                        Positioned.fill(
-                                          child: Image.network(
-                                            i == 4
-                                                ? 'https://s1.eestatic.com/2018/09/13/elandroidelibre/el_androide_libre_337730763_179714641_1706x960.jpg'
-                                            :products[products.length - 1 - i],
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                        Positioned(
-                                            top: 8,
-                                            left: 8,
-                                            child: Container(
-                                              padding: EdgeInsets.all(4),
-                                              decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      color: Theme.of(context)
-                                                          .colorScheme
-                                                          .secondary,
-                                                      width: 0.5),
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .secondary
-                                                      .withOpacity(0.6),
-                                                  shape: BoxShape.circle),
-                                              child: InkWell(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          ThemeConfig.radius16),
-                                                  child: Image.asset(
-                                                    'assets/images/crown_outline.png',
-                                                    color: Theme.of(context)
-                                                        .colorScheme
-                                                        .onPrimary,
-                                                    height: 22,
-                                                  )),
-                                            ))
-                                      ],
-                                    ),
-                                  )),
-                              Expanded(
-                                child: Stack(
-                                  children: [
-                                    Transform.translate(
-                                      offset: Offset(0, -8),
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .onPrimary,
-                                            borderRadius: BorderRadius.circular(
-                                                ThemeConfig.radius8)),
-                                      ),
-                                    ),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .onPrimary,
-                                          borderRadius: BorderRadius.circular(
-                                              ThemeConfig.radius8)),
-                                      child: Row(
-                                        children: [
-                                          SizedBox(
-                                            width: 8,
-                                          ),
-                                          Expanded(
-                                            child: Column(
-                                              children: [
-                                                Text(
-                                                  'اسم مادة طويل',
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    if (i % 2 != 0)
-                                                      Text('150\$',
-                                                          style: TextStyle(
-                                                            decoration:
-                                                                TextDecoration
-                                                                    .lineThrough,
-                                                          )),
-                                                    SizedBox(
-                                                      width: 8,
-                                                    ),
-                                                    Text(
-                                                        '${Random().nextInt(100)} \$',
-                                                        style: TextStyle(
-                                                            fontSize: 16,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold)),
-                                                  ],
-                                                ),
-                                                TextButton.icon(
-                                                  icon: Image.asset(
-                                                    'assets/images/add_to_cart.png',
-                                                    width: 22,
-                                                  ),
-                                                  onPressed: () {},
-                                                  label: Text('أضف إلى السلة'),
-                                                )
-                                              ],
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
+                      Text('الأصناف',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 16)),
+                      Spacer(),
+                      TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          'عرض الكل',
+                          style: TextStyle(fontSize: 12),
                         ),
                       ),
                     ],
                   ),
-              ],
-            ),
-          ))
-        ],
+                  SizedBox(
+                      height: 175,
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              for (var i = 0; i < 4; i++) getCategory(i)
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              for (var i = 1; i < 5; i++) getCategory(i + 3)
+                            ],
+                          ),
+                        ],
+                      )),
+                  Row(
+                    children: [
+                      Container(
+                          decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.circular(ThemeConfig.radius8),
+                              color: Theme.of(context).colorScheme.secondary),
+                          width: 4,
+                          height: 15),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      Text('المواد',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 16)),
+                      Spacer(),
+                      TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          'عرض الكل',
+                          style: TextStyle(fontSize: 12),
+                        ),
+                      ),
+                    ],
+                  ),
+                  for (var i = 0; i < products.length / 2; i++)
+                    Row(
+                      children: [
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return ProductPage(imagePath: products[i]);
+                              }));
+                            },
+                            child: SizedBox(
+                              height: 282,
+                              child: Card(
+                                clipBehavior: Clip.antiAlias,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(
+                                        ThemeConfig.radius8)),
+                                child: Column(
+                                  children: [
+                                    Expanded(
+                                        flex: 2,
+                                        child: ClipRRect(
+                                          borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(
+                                                  ThemeConfig.radius8),
+                                              topRight: Radius.circular(
+                                                  ThemeConfig.radius8)),
+                                          child: Stack(
+                                            fit: StackFit.expand,
+                                            children: [
+                                              Image.network(
+                                                i == 1
+                                                    ? 'https://s1.eestatic.com/2018/09/13/elandroidelibre/el_androide_libre_337730763_179714641_1706x960.jpg'
+                                                    : products[i],
+                                                fit: BoxFit.cover,
+                                              ),
+                                              Positioned(
+                                                  top: 8,
+                                                  left: 8,
+                                                  child: Container(
+                                                    padding: EdgeInsets.all(4),
+                                                    decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                            color:
+                                                                Theme.of(
+                                                                        context)
+                                                                    .colorScheme
+                                                                    .secondary,
+                                                            width: 0.5),
+                                                        color: i % 3 != 0
+                                                            ? Theme.of(context)
+                                                                .colorScheme
+                                                                .secondary
+                                                                .withOpacity(
+                                                                    0.8)
+                                                            : Theme.of(context)
+                                                                .colorScheme
+                                                                .secondary
+                                                                .withOpacity(
+                                                                    0.6),
+                                                        shape: BoxShape.circle),
+                                                    child: InkWell(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              ThemeConfig
+                                                                  .radius16),
+                                                      child: i % 3 == 0
+                                                          ? Image.asset(
+                                                              'assets/images/crown_outline.png',
+                                                              color: Theme.of(
+                                                                      context)
+                                                                  .colorScheme
+                                                                  .onPrimary,
+                                                              height: 22,
+                                                            )
+                                                          : Image.asset(
+                                                              'assets/images/crown.png',
+                                                              height: 22,
+                                                            ),
+                                                    ),
+                                                  ))
+                                            ],
+                                          ),
+                                        )),
+                                    Expanded(
+                                      child: Stack(
+                                        children: [
+                                          Transform.translate(
+                                            offset: Offset(0, -8),
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .onPrimary,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          ThemeConfig.radius8)),
+                                            ),
+                                          ),
+                                          Container(
+                                            decoration: BoxDecoration(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onPrimary,
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        ThemeConfig.radius8)),
+                                            child: Row(
+                                              children: [
+                                                SizedBox(
+                                                  width: 8,
+                                                ),
+                                                Expanded(
+                                                  child: Column(
+                                                    children: [
+                                                      Text(
+                                                        'اسم المادة',
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          if (i % 2 == 0)
+                                                            Text(
+                                                                '${i == 0 ? 18 : i * Random().nextInt(100)} \$',
+                                                                style:
+                                                                    TextStyle(
+                                                                  decoration:
+                                                                      TextDecoration
+                                                                          .lineThrough,
+                                                                )),
+                                                          SizedBox(
+                                                            width: 8,
+                                                          ),
+                                                          Text(
+                                                              '${i == 0 ? 15 : i * Random().nextInt(100)} \$',
+                                                              style: TextStyle(
+                                                                  fontSize: 16,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold)),
+                                                        ],
+                                                      ),
+                                                      TextButton.icon(
+                                                        icon: Image.asset(
+                                                          'assets/images/add_to_cart.png',
+                                                          width: 22,
+                                                        ),
+                                                        onPressed: () {},
+                                                        label: Text(
+                                                            'أضف إلى السلة'),
+                                                      )
+                                                    ],
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return ProductPage(imagePath: products[i]);
+                              }));
+                            },
+                            child: SizedBox(
+                              height: 282,
+                              child: Card(
+                                clipBehavior: Clip.antiAlias,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(
+                                        ThemeConfig.radius8)),
+                                child: Column(
+                                  children: [
+                                    Expanded(
+                                        flex: 2,
+                                        child: ClipRRect(
+                                          borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(
+                                                  ThemeConfig.radius8),
+                                              topRight: Radius.circular(
+                                                  ThemeConfig.radius8)),
+                                          child: Stack(
+                                            children: [
+                                              Positioned.fill(
+                                                child: Image.network(
+                                                  i == 4
+                                                      ? 'https://s1.eestatic.com/2018/09/13/elandroidelibre/el_androide_libre_337730763_179714641_1706x960.jpg'
+                                                      : products[
+                                                          products.length -
+                                                              1 -
+                                                              i],
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                              Positioned(
+                                                  top: 8,
+                                                  left: 8,
+                                                  child: Container(
+                                                    padding: EdgeInsets.all(4),
+                                                    decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                            color: Theme.of(
+                                                                    context)
+                                                                .colorScheme
+                                                                .secondary,
+                                                            width: 0.5),
+                                                        color: Theme.of(context)
+                                                            .colorScheme
+                                                            .secondary
+                                                            .withOpacity(0.6),
+                                                        shape: BoxShape.circle),
+                                                    child: InkWell(
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                                ThemeConfig
+                                                                    .radius16),
+                                                        child: Image.asset(
+                                                          'assets/images/crown_outline.png',
+                                                          color:
+                                                              Theme.of(context)
+                                                                  .colorScheme
+                                                                  .onPrimary,
+                                                          height: 22,
+                                                        )),
+                                                  ))
+                                            ],
+                                          ),
+                                        )),
+                                    Expanded(
+                                      child: Stack(
+                                        children: [
+                                          Transform.translate(
+                                            offset: Offset(0, -8),
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .onPrimary,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          ThemeConfig.radius8)),
+                                            ),
+                                          ),
+                                          Container(
+                                            decoration: BoxDecoration(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onPrimary,
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        ThemeConfig.radius8)),
+                                            child: Row(
+                                              children: [
+                                                SizedBox(
+                                                  width: 8,
+                                                ),
+                                                Expanded(
+                                                  child: Column(
+                                                    children: [
+                                                      Text(
+                                                        'اسم مادة طويل',
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          if (i % 2 != 0)
+                                                            Text('150\$',
+                                                                style:
+                                                                    TextStyle(
+                                                                  decoration:
+                                                                      TextDecoration
+                                                                          .lineThrough,
+                                                                )),
+                                                          SizedBox(
+                                                            width: 8,
+                                                          ),
+                                                          Text(
+                                                              '${Random().nextInt(100)} \$',
+                                                              style: TextStyle(
+                                                                  fontSize: 16,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold)),
+                                                        ],
+                                                      ),
+                                                      TextButton.icon(
+                                                        icon: Image.asset(
+                                                          'assets/images/add_to_cart.png',
+                                                          width: 22,
+                                                        ),
+                                                        onPressed: () {},
+                                                        label: Text(
+                                                            'أضف إلى السلة'),
+                                                      )
+                                                    ],
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                ],
+              ),
+            ))
+          ],
+        ),
       ),
     );
   }
 
   Widget getCategory(int index) {
+    if (index > 3)
+      return GestureDetector(
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return MaterialsPage(getImageNameByIndex(index));
+          }));
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            width: 75,
+            height: 70,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(ThemeConfig.radius16),
+              color: Theme.of(context).colorScheme.onPrimary,
+              boxShadow: [
+                BoxShadow(
+                  color: Theme.of(context).colorScheme.primary.withOpacity(0.2),
+                  blurRadius: 8,
+                  offset: Offset(0, 4),
+                )
+              ],
+            ),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 8,
+                ),
+                Image.asset(
+                  'assets/images/$index.png',
+                  width: 30,
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                Text(
+                  getImageNameByIndex(index),
+                  style: const TextStyle(
+                      fontSize: 10, fontWeight: FontWeight.w600),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Material(

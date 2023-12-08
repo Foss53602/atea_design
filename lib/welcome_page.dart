@@ -1,6 +1,6 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:atea_design/home_page.dart';
 import 'package:atea_design/theme_config.dart';
+import 'package:atea_design/user_area.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 
@@ -244,7 +244,7 @@ class _WelcomePageState extends State<WelcomePage> {
                   onPressed: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (BuildContext context) {
-                      return HomePage();
+                      return UserAreaPage();
                     }));
                   },
                   style: ButtonStyle(
@@ -252,7 +252,11 @@ class _WelcomePageState extends State<WelcomePage> {
                           borderRadius:
                               BorderRadius.circular(ThemeConfig.radius8)))),
                   icon: Icon(Icons.login),
-                  label: Text('تسجيل الدخول')),
+                  label: Text('تسجيل الدخول',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                          color: Theme.of(context).colorScheme.onPrimary))),
             ),
             Spacer()
           ],
