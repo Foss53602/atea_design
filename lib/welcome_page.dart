@@ -110,15 +110,18 @@ class _WelcomePageState extends State<WelcomePage> {
                         Offset(0.0, 0.0),
                         Offset(370.0, -40.0)
                       ]),
-                duration: 800,
+                duration: 1000,
                 itemWidth: 340.0,
                 itemHeight: 200.0,
                 itemBuilder: (context, index) {
-                  return ClipRRect(
-                    borderRadius: BorderRadius.circular(ThemeConfig.radius16),
-                    child: Image.asset(
-                      'assets/images/ad_${index + 1}.jpg',
-                      fit: BoxFit.cover,
+                  return AspectRatio(
+                    aspectRatio: 2 / 1,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(ThemeConfig.radius16),
+                      child: Image.asset(
+                        'assets/images/ad_${index + 1}.jpg',
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   );
                 },

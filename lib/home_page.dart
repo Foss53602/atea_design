@@ -1,8 +1,10 @@
 import 'dart:math';
 
+import 'package:atea_design/cart_page.dart';
 import 'package:atea_design/materials_page.dart';
 import 'package:atea_design/product_page.dart';
 import 'package:atea_design/theme_config.dart';
+import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
@@ -205,7 +207,12 @@ class _FavoritesState extends State<Favorites> {
                       suffixIcon: Icon(OctIcons.search_16),
                       hintText: 'بحث..',
                       border: OutlineInputBorder(
-                          borderSide: BorderSide.none,
+                          borderSide: BorderSide(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .primary
+                                  .withOpacity(0.8),
+                              width: 0.5),
                           borderRadius:
                               BorderRadius.circular(ThemeConfig.radius16))),
                 ),
@@ -539,25 +546,33 @@ class _HomeState extends State<Home> {
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
                   Spacer(),
-                  Stack(
-                    clipBehavior: Clip.none,
-                    children: [
-                      Image.asset('assets/images/cart.png', height: 28),
-                      Positioned(
-                        top: -10,
-                        right: -10,
-                        child: Container(
-                          padding: EdgeInsets.all(2),
-                          child: Text('26',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 10)),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.red,
+                  InkResponse(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return CartPage();
+                      }));
+                    },
+                    child: Stack(
+                      clipBehavior: Clip.none,
+                      children: [
+                        Image.asset('assets/images/cart.png', height: 28),
+                        Positioned(
+                          top: -10,
+                          right: -10,
+                          child: Container(
+                            padding: EdgeInsets.all(2),
+                            child: Text('26',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 10)),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.red,
+                            ),
                           ),
-                        ),
-                      )
-                    ],
+                        )
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -588,16 +603,31 @@ class _HomeState extends State<Home> {
                 Expanded(
                   child: TextField(
                     decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Theme.of(context).colorScheme.onPrimary,
-                        isDense: true,
-                        contentPadding: EdgeInsets.all(8),
-                        suffixIcon: Icon(OctIcons.search_16),
-                        hintText: 'بحث..',
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius:
-                                BorderRadius.circular(ThemeConfig.radius16))),
+                      filled: true,
+                      fillColor: Theme.of(context).colorScheme.onPrimary,
+                      isDense: true,
+                      contentPadding: EdgeInsets.all(8),
+                      suffixIcon: Icon(OctIcons.search_16),
+                      hintText: 'بحث..',
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .primary
+                                  .withOpacity(0.8),
+                              width: 0.5),
+                          borderRadius:
+                              BorderRadius.circular(ThemeConfig.radius16)),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .primary
+                                  .withOpacity(0.8),
+                              width: 0.5),
+                          borderRadius:
+                              BorderRadius.circular(ThemeConfig.radius16)),
+                    ),
                   ),
                 ),
               ],
@@ -609,6 +639,35 @@ class _HomeState extends State<Home> {
                 child: SingleChildScrollView(
               child: Column(
                 children: [
+                  SizedBox(
+                    height: 8,
+                  ),
+                  SizedBox(
+                    height: 175,
+                    child: Swiper(
+                      autoplay: true,
+                      duration: 1000,
+                      itemBuilder: (context, index) {
+                        return AspectRatio(
+                          aspectRatio: 2 / 1,
+                          child: ClipRRect(
+                            borderRadius:
+                                BorderRadius.circular(ThemeConfig.radius16),
+                            child: Image.asset(
+                              'assets/images/ad_${index + 1}.jpg',
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        );
+                      },
+                      itemCount: 4,
+                      viewportFraction: 0.8,
+                      scale: 0.9,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 8,
+                  ),
                   Row(
                     children: [
                       Container(
@@ -1017,51 +1076,53 @@ class _HomeState extends State<Home> {
   }
 
   Widget getCategory(int index) {
-    if (index > 3)
-      return GestureDetector(
-        onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return MaterialsPage(getImageNameByIndex(index));
-          }));
-        },
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Container(
-            width: 75,
-            height: 70,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(ThemeConfig.radius16),
-              color: Theme.of(context).colorScheme.onPrimary,
-              boxShadow: [
-                BoxShadow(
-                  color: Theme.of(context).colorScheme.primary.withOpacity(0.2),
-                  blurRadius: 8,
-                  offset: Offset(0, 4),
-                )
-              ],
-            ),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 8,
-                ),
-                Image.asset(
-                  'assets/images/$index.png',
-                  width: 30,
-                ),
-                SizedBox(
-                  height: 8,
-                ),
-                Text(
-                  getImageNameByIndex(index),
-                  style: const TextStyle(
-                      fontSize: 10, fontWeight: FontWeight.w600),
-                ),
-              ],
-            ),
+    // if (index > 3)
+    // second design
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return MaterialsPage(getImageNameByIndex(index));
+        }));
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          width: 75,
+          height: 70,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(ThemeConfig.radius16),
+            color: Theme.of(context).colorScheme.onPrimary,
+            boxShadow: [
+              BoxShadow(
+                color: Theme.of(context).colorScheme.primary.withOpacity(0.2),
+                blurRadius: 8,
+                offset: Offset(0, 4),
+              )
+            ],
+          ),
+          child: Column(
+            children: [
+              SizedBox(
+                height: 8,
+              ),
+              Image.asset(
+                'assets/images/$index.png',
+                width: 30,
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              Text(
+                getImageNameByIndex(index),
+                style:
+                    const TextStyle(fontSize: 10, fontWeight: FontWeight.w600),
+              ),
+            ],
           ),
         ),
-      );
+      ),
+    );
+    // first design
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Material(
