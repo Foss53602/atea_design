@@ -53,6 +53,7 @@ class _ProductPageState extends State<ProductPage> {
                     ),
                   ),
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       InkResponse(
                         onTap: () {
@@ -75,29 +76,54 @@ class _ProductPageState extends State<ProductPage> {
                         ),
                       ),
                       Spacer(),
-                      Container(
-                        margin: EdgeInsets.all(8),
-                        padding: EdgeInsets.all(4),
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                                color: Theme.of(context).colorScheme.secondary,
-                                width: 0.5),
-                            color: Theme.of(context)
-                                .colorScheme
-                                .secondary
-                                .withOpacity(0.6),
-                            shape: BoxShape.circle),
-                        child: InkWell(
-                            borderRadius:
+                      Column(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.all(8),
+                            padding: EdgeInsets.all(4),
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    color: Theme.of(context).colorScheme.secondary,
+                                    width: 0.5),
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .secondary
+                                    .withOpacity(0.6),
+                                shape: BoxShape.circle),
+                            child: InkWell(
+                                borderRadius:
+                                    BorderRadius.circular(ThemeConfig.radius16),
+                                child: Image.asset(
+                                  'assets/images/crown_outline.png',
+                                  color: Theme.of(context).colorScheme.onPrimary,
+                                  height: 22,
+                                )),
+                          ),
+                          Container(
+                            margin: EdgeInsets.all(8),
+                            padding: EdgeInsets.all(6),
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    color: Theme.of(context).colorScheme.primary,
+                                    width: 0.5),
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .primary
+                                    .withOpacity(0.8),
+                                shape: BoxShape.circle),
+                            child: InkWell(
+                                borderRadius:
                                 BorderRadius.circular(ThemeConfig.radius16),
-                            child: Image.asset(
-                              'assets/images/crown_outline.png',
-                              color: Theme.of(context).colorScheme.onPrimary,
-                              height: 22,
-                            )),
+                                child: Icon(
+                                  Icons.share,
+                                  color: Theme.of(context).colorScheme.onPrimary,
+                                  size: 20,
+                                )),
+                          ),
+                        ],
                       )
                     ],
-                  )
+                  ),
                 ],
               ),
               Stack(

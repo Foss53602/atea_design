@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:atea_design/cart_page.dart';
 import 'package:atea_design/materials_page.dart';
+import 'package:atea_design/orders_page.dart';
 import 'package:atea_design/product_page.dart';
 import 'package:atea_design/theme_config.dart';
 import 'package:card_swiper/card_swiper.dart';
@@ -107,11 +108,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             Home(),
             Favorites(),
-            Container(
-              child: Center(
-                child: Text('الطلبيات'),
-              ),
-            ),
+            OrdersPage(),
             Container(
                 child: Center(
               child: Text('الإشعارات'),
@@ -206,6 +203,15 @@ class _FavoritesState extends State<Favorites> {
                       contentPadding: EdgeInsets.all(8),
                       suffixIcon: Icon(OctIcons.search_16),
                       hintText: 'بحث..',
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .primary
+                                  .withOpacity(0.8),
+                              width: 0.5),
+                          borderRadius:
+                              BorderRadius.circular(ThemeConfig.radius16)),
                       border: OutlineInputBorder(
                           borderSide: BorderSide(
                               color: Theme.of(context)
@@ -603,31 +609,30 @@ class _HomeState extends State<Home> {
                 Expanded(
                   child: TextField(
                     decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Theme.of(context).colorScheme.onPrimary,
-                      isDense: true,
-                      contentPadding: EdgeInsets.all(8),
-                      suffixIcon: Icon(OctIcons.search_16),
-                      hintText: 'بحث..',
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .primary
-                                  .withOpacity(0.8),
-                              width: 0.5),
-                          borderRadius:
-                              BorderRadius.circular(ThemeConfig.radius16)),
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .primary
-                                  .withOpacity(0.8),
-                              width: 0.5),
-                          borderRadius:
-                              BorderRadius.circular(ThemeConfig.radius16)),
-                    ),
+                        filled: true,
+                        fillColor: Theme.of(context).colorScheme.onPrimary,
+                        isDense: true,
+                        contentPadding: EdgeInsets.all(8),
+                        suffixIcon: Icon(OctIcons.search_16),
+                        hintText: 'بحث..',
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .primary
+                                    .withOpacity(0.8),
+                                width: 0.5),
+                            borderRadius:
+                                BorderRadius.circular(ThemeConfig.radius16)),
+                        border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .primary
+                                    .withOpacity(0.8),
+                                width: 0.5),
+                            borderRadius:
+                                BorderRadius.circular(ThemeConfig.radius16))),
                   ),
                 ),
               ],
