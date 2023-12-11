@@ -128,7 +128,7 @@ class _MaterialsPageState extends State<MaterialsPage> {
                   Container(
                       decoration: BoxDecoration(
                           borderRadius:
-                          BorderRadius.circular(ThemeConfig.radius8),
+                              BorderRadius.circular(ThemeConfig.radius8),
                           color: Theme.of(context).colorScheme.secondary),
                       width: 4,
                       height: 15),
@@ -139,10 +139,151 @@ class _MaterialsPageState extends State<MaterialsPage> {
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
                   Spacer(),
-                  ElevatedButton.icon(
-                      icon: Icon(Icons.arrow_drop_down),
-                      onPressed: () {},
-                      label: Text('ترتيب حسب')),
+                  TextButton.icon(
+                    icon: Icon(Icons.sort),
+                    onPressed: () {
+                      showModalBottomSheet(
+                          context: context,
+                          builder: (context) {
+                            return Container(
+                              padding: EdgeInsets.all(ThemeConfig.pagePadding),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  SizedBox(
+                                    height: 8,
+                                  ),
+                                  Text(
+                                    'ترتيب حسب',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16),
+                                  ),
+                                  SizedBox(
+                                    height: 8,
+                                  ),
+                                  ListTile(
+                                    iconColor:
+                                        Theme.of(context).colorScheme.secondary,
+                                    onTap: () {},
+                                    title: Container(
+                                      padding: EdgeInsets.all(8),
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(
+                                              ThemeConfig.radius8),
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .secondary
+                                              .withOpacity(0.1)),
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            'الأحدث',
+                                            style: TextStyle(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .secondary),
+                                          ),
+                                          Spacer(),
+                                          Icon(
+                                            Icons.check,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .secondary,
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    leading: Icon(Icons.access_time),
+                                  ),
+                                  ListTile(
+                                    onTap: () {},
+                                    title: Text('الأقدم'),
+                                    leading: Icon(Icons.access_time),
+                                  ),
+                                  ListTile(
+                                    onTap: () {},
+                                    title: Text('الأعلى سعراً'),
+                                    leading: Icon(Icons.attach_money),
+                                  ),
+                                  ListTile(
+                                    onTap: () {},
+                                    iconColor:
+                                        Theme.of(context).colorScheme.secondary,
+                                    title: Container(
+                                      padding: EdgeInsets.all(8),
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(
+                                              ThemeConfig.radius8),
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .secondary
+                                              .withOpacity(0.1)),
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            'الأقل سعراً',
+                                            style: TextStyle(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .secondary),
+                                          ),
+                                          Spacer(),
+                                          Icon(
+                                            Icons.check,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .secondary,
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    leading: Icon(Icons.attach_money),
+                                  ),
+                                  ListTile(
+                                    onTap: () {},
+                                    title: Text('الأكثر شراء'),
+                                    leading: Icon(Icons.payment),
+                                  ),
+                                  ListTile(
+                                    onTap: () {},
+                                    title: Text('الأقل شراء'),
+                                    leading: Icon(Icons.payment),
+                                  ),
+                                  SizedBox(
+                                    height: 16,
+                                  ),
+                                  ButtonBar(
+                                    mainAxisSize: MainAxisSize.max,
+                                    alignment: MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      TextButton.icon(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          icon: Icon(Icons.check),
+                                          label: Text('تطبيق')),
+                                      TextButton.icon(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          icon: Icon(
+                                            Icons.close,
+                                            color: Colors.red,
+                                          ),
+                                          label: Text(
+                                            'إلغاء',
+                                            style: TextStyle(color: Colors.red),
+                                          )),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            );
+                          });
+                    },
+                    label: Text('ترتيب حسب'),
+                  )
                 ],
               ),
               Expanded(

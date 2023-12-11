@@ -588,20 +588,25 @@ class _HomeState extends State<Home> {
             ),
             Row(
               children: [
-                Container(
-                  width: 45,
-                  padding: EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .primary
-                          .withOpacity(0.8),
-                      borderRadius:
-                          BorderRadius.circular(ThemeConfig.radius16)),
-                  child: Image.asset('assets/images/filter.png',
-                      height: 20,
-                      width: 20,
-                      color: Theme.of(context).colorScheme.onPrimary),
+                InkResponse(
+                  onTap: () {
+                    _filter();
+                  },
+                  child: Container(
+                    width: 45,
+                    padding: EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                        color: Theme.of(context)
+                            .colorScheme
+                            .primary
+                            .withOpacity(0.8),
+                        borderRadius:
+                            BorderRadius.circular(ThemeConfig.radius16)),
+                    child: Image.asset('assets/images/filter.png',
+                        height: 20,
+                        width: 20,
+                        color: Theme.of(context).colorScheme.onPrimary),
+                  ),
                 ),
                 SizedBox(
                   width: 8,
@@ -1191,5 +1196,256 @@ class _HomeState extends State<Home> {
         return 'احذية';
     }
     return '';
+  }
+
+  void _filter() {
+    showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return Container(
+            padding: EdgeInsets.all(ThemeConfig.pagePadding),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'فلترة حسب',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  ),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  Column(
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(
+                                      ThemeConfig.radius8),
+                                  color:
+                                      Theme.of(context).colorScheme.secondary),
+                              width: 4,
+                              height: 15),
+                          SizedBox(
+                            width: 8,
+                          ),
+                          Text(
+                            'الصنف',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 16),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      Row(
+                        children: [
+                          Container(
+                            width: 50,
+                            height: 50,
+                            padding: EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.circular(ThemeConfig.radius8),
+                              border: Border.all(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .secondary
+                                      .withOpacity(0.2)),
+                            ),
+                            child: Center(
+                                child: Text(
+                              'الكل',
+                              style: TextStyle(
+                                  color:
+                                      Theme.of(context).colorScheme.secondary),
+                            )),
+                          ),
+                          SizedBox(
+                            width: 8,
+                          ),
+                          Expanded(
+                              child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              children: [
+                                for (var i = 0; i < 8; i++)
+                                  Container(
+                                    margin: EdgeInsets.only(right: 8),
+                                    height: 50,
+                                    padding: EdgeInsets.all(8),
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(
+                                            ThemeConfig.radius8),
+                                        border: i != 0 && i != 2
+                                            ? Border.all(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .secondary
+                                                    .withOpacity(0.2),
+                                                width: 0.5)
+                                            : null,
+                                        color: i == 0 || i == 2
+                                            ? Theme.of(context)
+                                                .colorScheme
+                                                .secondary
+                                                .withOpacity(0.2)
+                                            : null),
+                                    child: Center(
+                                        child: Row(
+                                      children: [
+                                        Image.asset(
+                                          'assets/images/$i.png',
+                                          color: i == 0 || i == 2
+                                              ? Theme.of(context)
+                                                  .colorScheme
+                                                  .secondary
+                                              : null,
+                                          width: 20,
+                                        ),
+                                        SizedBox(
+                                          width: 8,
+                                        ),
+                                        Text(
+                                          getImageNameByIndex(i),
+                                          style: TextStyle(
+                                              color: i == 0 || i == 2
+                                                  ? Theme.of(context)
+                                                      .colorScheme
+                                                      .secondary
+                                                  : null),
+                                        ),
+                                      ],
+                                    )),
+                                  ),
+                              ],
+                            ),
+                          ))
+                        ],
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 32,
+                  ),
+                  Column(
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(
+                                      ThemeConfig.radius8),
+                                  color:
+                                      Theme.of(context).colorScheme.secondary),
+                              width: 4,
+                              height: 15),
+                          SizedBox(
+                            width: 8,
+                          ),
+                          Text(
+                            'السعر',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 16),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                              child: TextField(
+                            decoration: InputDecoration(
+                                hintText: 'من',
+                                contentPadding: EdgeInsets.all(8),
+                                filled: true,
+                                fillColor:
+                                    Theme.of(context).colorScheme.onPrimary,
+                                suffixIcon: Icon(Icons.attach_money),
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primary
+                                            .withOpacity(0.8),
+                                        width: 0.5),
+                                    borderRadius: BorderRadius.circular(
+                                        ThemeConfig.radius8)),
+                                border: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primary
+                                            .withOpacity(0.8),
+                                        width: 0.5),
+                                    borderRadius: BorderRadius.circular(
+                                        ThemeConfig.radius8))),
+                          )),
+                          SizedBox(
+                            width: 8,
+                          ),
+                          Expanded(
+                              child: TextField(
+                            decoration: InputDecoration(
+                                hintText: 'إلى',
+                                contentPadding: EdgeInsets.all(8),
+                                filled: true,
+                                fillColor:
+                                    Theme.of(context).colorScheme.onPrimary,
+                                suffixIcon: Icon(Icons.attach_money),
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primary
+                                            .withOpacity(0.8),
+                                        width: 0.5),
+                                    borderRadius: BorderRadius.circular(
+                                        ThemeConfig.radius8)),
+                                border: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primary
+                                            .withOpacity(0.8),
+                                        width: 0.5),
+                                    borderRadius: BorderRadius.circular(
+                                        ThemeConfig.radius8))),
+                          )),
+                        ],
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  ButtonBar(
+                    mainAxisSize: MainAxisSize.max,
+                    alignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      TextButton.icon(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          icon: Icon(Icons.check),
+                          label: Text('تطبيق')),
+                      TextButton.icon(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          icon: Icon(Icons.close, color: Colors.red),
+                          label: Text('إلغاء', style: TextStyle(color: Colors.red))),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          );
+        });
   }
 }
