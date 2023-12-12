@@ -1,3 +1,4 @@
+import 'package:atea_design/Widgets/main_app_bar.dart';
 import 'package:atea_design/cart_page.dart';
 import 'package:atea_design/theme_config.dart';
 import 'package:flutter/material.dart';
@@ -19,51 +20,8 @@ class _OrdersPageState extends State<OrdersPage> {
           const SizedBox(
             height: 35,
           ),
-          Padding(
-            padding: EdgeInsets.only(top: 8, bottom: 8),
-            child: Row(
-              children: [
-                CircleAvatar(
-                  radius: 22,
-                  backgroundImage: NetworkImage(
-                    'https://d3r4f9ursifuvh.cloudfront.net/cms/images/marketing-manager/og/Junger_Mann_im_Anzug_im_B%C3%BCro.jpg',
-                  ),
-                ),
-                Spacer(),
-                Text('الطلبيات',
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                Spacer(),
-                InkResponse(
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                          return CartPage();
-                        }));
-                  },
-                  child: Stack(
-                    clipBehavior: Clip.none,
-                    children: [
-                      Image.asset('assets/images/cart.png', height: 28),
-                      Positioned(
-                        top: -10,
-                        right: -10,
-                        child: Container(
-                          padding: EdgeInsets.all(2),
-                          child: Text('26',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 10)),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.red,
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            ),
+          MainAppBar(
+            title: 'الطلبيات',
           ),
           SizedBox(
             height: 8,
@@ -107,7 +65,7 @@ class _OrdersPageState extends State<OrdersPage> {
                                   children: [
                                     Text('المبلغ: '),
                                     Text(
-                                      '122.00 \$',
+                                      '144.00 \$',
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           color: Theme.of(context)
@@ -158,121 +116,228 @@ class _OrdersPageState extends State<OrdersPage> {
                                     ThemeConfig.radius16)),
                             title: Text('التفاصيل'),
                             children: [
-                              ListTile(
-                                  title: Row(
-                                    children: [
-                                      Container(
-                                        width: 5,
-                                        height: 5,
-                                        decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            color: Colors.black),
-                                      ),
-                                      SizedBox(
-                                        width: 8,
-                                      ),
-                                      Text('بلوزة صوف',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold)),
-                                      SizedBox(
-                                        width: 8,
-                                      ),
-                                      Text(
-                                        'تركي - LC Waikiki',
-                                        style: TextStyle(
-                                            fontSize: 12,
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .outlineVariant),
-                                      )
-                                    ],
-                                  ),
-                                  subtitle: Wrap(
-                                    children: [
-                                      Text('السعر: '),
-                                      SizedBox(
-                                        width: 4,
-                                      ),
-                                      Text(
-                                        '31.00 \$',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .secondary),
-                                      ),
-                                      SizedBox(
-                                        width: 8,
-                                      ),
-                                      Text('الكمية: '),
-                                      SizedBox(
-                                        width: 4,
-                                      ),
-                                      Text(
-                                        '2',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .secondary),
-                                      ),
-                                      SizedBox(
-                                        width: 8,
-                                      ),
-                                      Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Text('اللون: '),
-                                          SizedBox(
-                                            width: 4,
-                                          ),
-                                          Container(
-                                            width: 20,
-                                            height: 20,
-                                            decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                color: Colors.teal),
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        width: 8,
-                                      ),
-                                      Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Text('المقاس: '),
-                                          SizedBox(
-                                            width: 4,
-                                          ),
-                                          Container(
-                                            width: 30,
-                                            height: 22,
-                                            margin: EdgeInsets.only(left: 8),
-                                            child: Center(
-                                              child: Text('S',
-                                                  textAlign: TextAlign.center,
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: Theme.of(context)
-                                                          .colorScheme
-                                                          .onPrimary)),
+                              Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(
+                                      ThemeConfig.radius16),
+                                  border: Border.all(
+                                      width: 0.5,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .primary),
+                                ),
+                                padding: EdgeInsets.all(8),
+                                margin: EdgeInsets.all(4),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        SizedBox(
+                                          width: 8,
+                                        ),
+                                        Text('احمد سعيد',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold)),
+                                        Spacer(),
+                                        Text('80.00 \$',
+                                            style: TextStyle(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .secondary)),
+                                        SizedBox(
+                                          width: 8,
+                                        ),
+                                      ],
+                                    ),
+                                    Divider(
+                                      color:
+                                          Theme.of(context).colorScheme.primary,
+                                      thickness: 0.2,
+                                    ),
+                                    ListTile(
+                                        title: Row(
+                                          children: [
+                                            Container(
+                                              width: 5,
+                                              height: 5,
+                                              decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  color: Colors.black),
                                             ),
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        ThemeConfig.radius16),
-                                                border: Border.all(
-                                                  width: 0.2,
-                                                  color: Colors.black,
+                                            SizedBox(
+                                              width: 8,
+                                            ),
+                                            Text('بلوزة صوف',
+                                                style: TextStyle(
+                                                    fontWeight:
+                                                        FontWeight.bold)),
+                                            SizedBox(
+                                              width: 8,
+                                            ),
+                                            Text(
+                                              'تركي - LC Waikiki',
+                                              style: TextStyle(
+                                                  fontSize: 12,
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .outlineVariant),
+                                            )
+                                          ],
+                                        ),
+                                        subtitle: Wrap(
+                                          children: [
+                                            Text('السعر: '),
+                                            SizedBox(
+                                              width: 4,
+                                            ),
+                                            Text(
+                                              '31.00 \$',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .secondary),
+                                            ),
+                                            SizedBox(
+                                              width: 8,
+                                            ),
+                                            Text('الكمية: '),
+                                            SizedBox(
+                                              width: 4,
+                                            ),
+                                            Text(
+                                              '2',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .secondary),
+                                            ),
+                                            SizedBox(
+                                              width: 8,
+                                            ),
+                                            Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Text('اللون: '),
+                                                SizedBox(
+                                                  width: 4,
                                                 ),
-                                                color: Colors.black),
-                                          )
-                                        ],
-                                      )
-                                    ],
-                                  )),
+                                                Container(
+                                                  width: 20,
+                                                  height: 20,
+                                                  decoration: BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                      color: Colors.teal),
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              width: 8,
+                                            ),
+                                            Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Text('المقاس: '),
+                                                SizedBox(
+                                                  width: 4,
+                                                ),
+                                                Container(
+                                                  width: 30,
+                                                  height: 22,
+                                                  margin:
+                                                      EdgeInsets.only(left: 8),
+                                                  child: Center(
+                                                    child: Text('S',
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            color: Theme.of(
+                                                                    context)
+                                                                .colorScheme
+                                                                .onPrimary)),
+                                                  ),
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              ThemeConfig
+                                                                  .radius16),
+                                                      border: Border.all(
+                                                        width: 0.2,
+                                                        color: Colors.black,
+                                                      ),
+                                                      color: Colors.black),
+                                                )
+                                              ],
+                                            )
+                                          ],
+                                        )),
+                                    ListTile(
+                                        title: Row(
+                                          children: [
+                                            Container(
+                                              width: 5,
+                                              height: 5,
+                                              decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  color: Colors.black),
+                                            ),
+                                            SizedBox(
+                                              width: 8,
+                                            ),
+                                            Text('سماعة بلوتوث',
+                                                style: TextStyle(
+                                                    fontWeight:
+                                                        FontWeight.bold)),
+                                            SizedBox(
+                                              width: 8,
+                                            ),
+                                            Text(
+                                              'صيني - ابل',
+                                              style: TextStyle(
+                                                  fontSize: 12,
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .outlineVariant),
+                                            )
+                                          ],
+                                        ),
+                                        subtitle: Row(
+                                          children: [
+                                            Text('السعر: '),
+                                            SizedBox(
+                                              width: 4,
+                                            ),
+                                            Text(
+                                              '22.00 \$',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .secondary),
+                                            ),
+                                            SizedBox(
+                                              width: 8,
+                                            ),
+                                            Text('الكمية: '),
+                                            SizedBox(
+                                              width: 4,
+                                            ),
+                                            Text(
+                                              '1',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .secondary),
+                                            ),
+                                          ],
+                                        )),
+                                  ],
+                                ),
+                              ),
                               ListTile(
                                   title: Row(
                                     children: [

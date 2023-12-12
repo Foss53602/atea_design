@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:atea_design/Widgets/main_app_bar.dart';
 import 'package:atea_design/theme_config.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
@@ -46,40 +47,7 @@ class _MaterialsPageState extends State<MaterialsPage> {
               const SizedBox(
                 height: 35,
               ),
-              Padding(
-                padding: EdgeInsets.only(top: 8, bottom: 8),
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      radius: 22,
-                      backgroundImage: NetworkImage(
-                        'https://d3r4f9ursifuvh.cloudfront.net/cms/images/marketing-manager/og/Junger_Mann_im_Anzug_im_B%C3%BCro.jpg',
-                      ),
-                    ),
-                    Spacer(),
-                    Stack(
-                      clipBehavior: Clip.none,
-                      children: [
-                        Image.asset('assets/images/cart.png', height: 28),
-                        Positioned(
-                          top: -10,
-                          right: -10,
-                          child: Container(
-                            padding: EdgeInsets.all(2),
-                            child: Text('26',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 10)),
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.red,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-              ),
+              MainAppBar(),
               SizedBox(
                 height: 8,
               ),
@@ -89,16 +57,20 @@ class _MaterialsPageState extends State<MaterialsPage> {
                     width: 45,
                     padding: EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                        color: Theme.of(context)
+                        color: Theme
+                            .of(context)
                             .colorScheme
                             .primary
                             .withOpacity(0.8),
                         borderRadius:
-                            BorderRadius.circular(ThemeConfig.radius16)),
+                        BorderRadius.circular(ThemeConfig.radius16)),
                     child: Image.asset('assets/images/filter.png',
                         height: 20,
                         width: 20,
-                        color: Theme.of(context).colorScheme.onPrimary),
+                        color: Theme
+                            .of(context)
+                            .colorScheme
+                            .onPrimary),
                   ),
                   SizedBox(
                     width: 8,
@@ -107,7 +79,10 @@ class _MaterialsPageState extends State<MaterialsPage> {
                     child: TextField(
                       decoration: InputDecoration(
                           filled: true,
-                          fillColor: Theme.of(context).colorScheme.onPrimary,
+                          fillColor: Theme
+                              .of(context)
+                              .colorScheme
+                              .onPrimary,
                           isDense: true,
                           contentPadding: EdgeInsets.all(8),
                           suffixIcon: Icon(OctIcons.search_16),
@@ -115,7 +90,7 @@ class _MaterialsPageState extends State<MaterialsPage> {
                           border: OutlineInputBorder(
                               borderSide: BorderSide.none,
                               borderRadius:
-                                  BorderRadius.circular(ThemeConfig.radius16))),
+                              BorderRadius.circular(ThemeConfig.radius16))),
                     ),
                   ),
                 ],
@@ -128,8 +103,11 @@ class _MaterialsPageState extends State<MaterialsPage> {
                   Container(
                       decoration: BoxDecoration(
                           borderRadius:
-                              BorderRadius.circular(ThemeConfig.radius8),
-                          color: Theme.of(context).colorScheme.secondary),
+                          BorderRadius.circular(ThemeConfig.radius8),
+                          color: Theme
+                              .of(context)
+                              .colorScheme
+                              .secondary),
                       width: 4,
                       height: 15),
                   SizedBox(
@@ -137,7 +115,7 @@ class _MaterialsPageState extends State<MaterialsPage> {
                   ),
                   Text(widget.imageNameByIndex,
                       style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
                   Spacer(),
                   TextButton.icon(
                     icon: Icon(Icons.sort),
@@ -164,14 +142,18 @@ class _MaterialsPageState extends State<MaterialsPage> {
                                   ),
                                   ListTile(
                                     iconColor:
-                                        Theme.of(context).colorScheme.secondary,
+                                    Theme
+                                        .of(context)
+                                        .colorScheme
+                                        .secondary,
                                     onTap: () {},
                                     title: Container(
                                       padding: EdgeInsets.all(8),
                                       decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(
                                               ThemeConfig.radius8),
-                                          color: Theme.of(context)
+                                          color: Theme
+                                              .of(context)
                                               .colorScheme
                                               .secondary
                                               .withOpacity(0.1)),
@@ -180,14 +162,16 @@ class _MaterialsPageState extends State<MaterialsPage> {
                                           Text(
                                             'الأحدث',
                                             style: TextStyle(
-                                                color: Theme.of(context)
+                                                color: Theme
+                                                    .of(context)
                                                     .colorScheme
                                                     .secondary),
                                           ),
                                           Spacer(),
                                           Icon(
                                             Icons.check,
-                                            color: Theme.of(context)
+                                            color: Theme
+                                                .of(context)
                                                 .colorScheme
                                                 .secondary,
                                           )
@@ -209,13 +193,17 @@ class _MaterialsPageState extends State<MaterialsPage> {
                                   ListTile(
                                     onTap: () {},
                                     iconColor:
-                                        Theme.of(context).colorScheme.secondary,
+                                    Theme
+                                        .of(context)
+                                        .colorScheme
+                                        .secondary,
                                     title: Container(
                                       padding: EdgeInsets.all(8),
                                       decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(
                                               ThemeConfig.radius8),
-                                          color: Theme.of(context)
+                                          color: Theme
+                                              .of(context)
                                               .colorScheme
                                               .secondary
                                               .withOpacity(0.1)),
@@ -224,14 +212,16 @@ class _MaterialsPageState extends State<MaterialsPage> {
                                           Text(
                                             'الأقل سعراً',
                                             style: TextStyle(
-                                                color: Theme.of(context)
+                                                color: Theme
+                                                    .of(context)
                                                     .colorScheme
                                                     .secondary),
                                           ),
                                           Spacer(),
                                           Icon(
                                             Icons.check,
-                                            color: Theme.of(context)
+                                            color: Theme
+                                                .of(context)
                                                 .colorScheme
                                                 .secondary,
                                           )
@@ -288,317 +278,346 @@ class _MaterialsPageState extends State<MaterialsPage> {
               ),
               Expanded(
                   child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    for (var i = 0; i < products.length / 2; i++)
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Container(
-                              clipBehavior: Clip.antiAlias,
-                              height: 275,
-                              margin: EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                      ThemeConfig.radius8),
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .primary
-                                      .withOpacity(0.2)),
-                              child: Column(
-                                children: [
-                                  Expanded(
-                                      flex: 2,
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(
-                                                ThemeConfig.radius8),
-                                            topRight: Radius.circular(
-                                                ThemeConfig.radius8)),
-                                        child: Stack(
-                                          fit: StackFit.expand,
-                                          children: [
-                                            Image.network(
-                                              products[i],
-                                              fit: BoxFit.cover,
-                                            ),
-                                            Positioned(
-                                                top: 8,
-                                                left: 8,
-                                                child: Container(
-                                                  padding: EdgeInsets.all(4),
-                                                  decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          color:
-                                                              Theme.of(context)
+                    child: Column(
+                      children: [
+                        for (var i = 0; i < products.length / 2; i++)
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Container(
+                                  clipBehavior: Clip.antiAlias,
+                                  height: 275,
+                                  margin: EdgeInsets.all(8),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(
+                                          ThemeConfig.radius8),
+                                      color: Theme
+                                          .of(context)
+                                          .colorScheme
+                                          .primary
+                                          .withOpacity(0.2)),
+                                  child: Column(
+                                    children: [
+                                      Expanded(
+                                          flex: 2,
+                                          child: ClipRRect(
+                                            borderRadius: BorderRadius.only(
+                                                topLeft: Radius.circular(
+                                                    ThemeConfig.radius8),
+                                                topRight: Radius.circular(
+                                                    ThemeConfig.radius8)),
+                                            child: Stack(
+                                              fit: StackFit.expand,
+                                              children: [
+                                                Image.network(
+                                                  products[i],
+                                                  fit: BoxFit.cover,
+                                                ),
+                                                Positioned(
+                                                    top: 8,
+                                                    left: 8,
+                                                    child: Container(
+                                                      padding: EdgeInsets.all(
+                                                          4),
+                                                      decoration: BoxDecoration(
+                                                          border: Border.all(
+                                                              color:
+                                                              Theme
+                                                                  .of(context)
                                                                   .colorScheme
                                                                   .secondary,
-                                                          width: 0.5),
-                                                      color: i % 3 != 0
-                                                          ? Theme.of(context)
+                                                              width: 0.5),
+                                                          color: i % 3 != 0
+                                                              ? Theme
+                                                              .of(context)
                                                               .colorScheme
                                                               .secondary
                                                               .withOpacity(0.8)
-                                                          : Theme.of(context)
+                                                              : Theme
+                                                              .of(context)
                                                               .colorScheme
                                                               .secondary
                                                               .withOpacity(0.6),
-                                                      shape: BoxShape.circle),
-                                                  child: InkWell(
-                                                    borderRadius:
+                                                          shape: BoxShape
+                                                              .circle),
+                                                      child: InkWell(
+                                                        borderRadius:
                                                         BorderRadius.circular(
                                                             ThemeConfig
                                                                 .radius16),
-                                                    child: i % 3 == 0
-                                                        ? Image.asset(
-                                                            'assets/images/crown_outline.png',
-                                                            color: Theme.of(
-                                                                    context)
-                                                                .colorScheme
-                                                                .onPrimary,
-                                                            height: 22,
-                                                          )
-                                                        : Image.asset(
-                                                            'assets/images/crown.png',
-                                                            height: 22,
-                                                          ),
-                                                  ),
-                                                ))
-                                          ],
-                                        ),
-                                      )),
-                                  Expanded(
-                                    child: Stack(
-                                      children: [
-                                        Transform.translate(
-                                          offset: Offset(0, -8),
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .onPrimary,
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        ThemeConfig.radius8)),
-                                          ),
-                                        ),
-                                        Container(
-                                          decoration: BoxDecoration(
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .onPrimary,
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                      ThemeConfig.radius8)),
-                                          child: Row(
-                                            children: [
-                                              SizedBox(
-                                                width: 8,
-                                              ),
-                                              Expanded(
-                                                child: Column(
-                                                  children: [
-                                                    Text(
-                                                      'اسم المادة',
-                                                    ),
-                                                    Row(
-                                                      children: [
-                                                        if (i % 2 == 0)
-                                                          Text(
-                                                              '${i == 0 ? 18 : i * Random().nextInt(100)} \$',
-                                                              style: TextStyle(
-                                                                decoration:
-                                                                    TextDecoration
-                                                                        .lineThrough,
-                                                              )),
-                                                        SizedBox(
-                                                          width: 8,
+                                                        child: i % 3 == 0
+                                                            ? Image.asset(
+                                                          'assets/images/crown_outline.png',
+                                                          color: Theme
+                                                              .of(
+                                                              context)
+                                                              .colorScheme
+                                                              .onPrimary,
+                                                          height: 22,
+                                                        )
+                                                            : Image.asset(
+                                                          'assets/images/crown.png',
+                                                          height: 22,
                                                         ),
-                                                        Text(
-                                                            '${i == 0 ? 15 : i * Random().nextInt(100)} \$',
-                                                            style: TextStyle(
-                                                                fontSize: 16,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold)),
-                                                      ],
-                                                    ),
-                                                    TextButton.icon(
-                                                      icon: Image.asset(
-                                                        'assets/images/add_to_cart.png',
-                                                        width: 22,
                                                       ),
-                                                      onPressed: () {},
-                                                      label:
-                                                          Text('أضف إلى السلة'),
-                                                    )
-                                                  ],
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Container(
-                              clipBehavior: Clip.antiAlias,
-                              height: 275,
-                              margin: EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                      ThemeConfig.radius8),
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .primary
-                                      .withOpacity(0.2)),
-                              child: Column(
-                                children: [
-                                  Expanded(
-                                      flex: 2,
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(
-                                                ThemeConfig.radius8),
-                                            topRight: Radius.circular(
-                                                ThemeConfig.radius8)),
+                                                    ))
+                                              ],
+                                            ),
+                                          )),
+                                      Expanded(
                                         child: Stack(
                                           children: [
-                                            Positioned.fill(
-                                              child: Image.network(
-                                                products[
-                                                    products.length - 1 - i],
-                                                fit: BoxFit.cover,
+                                            Transform.translate(
+                                              offset: Offset(0, -8),
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                    color: Theme
+                                                        .of(context)
+                                                        .colorScheme
+                                                        .onPrimary,
+                                                    borderRadius:
+                                                    BorderRadius.circular(
+                                                        ThemeConfig.radius8)),
                                               ),
                                             ),
-                                            Positioned(
-                                                top: 8,
-                                                left: 8,
-                                                child: Container(
-                                                  padding: EdgeInsets.all(4),
-                                                  decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          color:
-                                                              Theme.of(context)
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                  color: Theme
+                                                      .of(context)
+                                                      .colorScheme
+                                                      .onPrimary,
+                                                  borderRadius:
+                                                  BorderRadius.circular(
+                                                      ThemeConfig.radius8)),
+                                              child: Row(
+                                                children: [
+                                                  SizedBox(
+                                                    width: 8,
+                                                  ),
+                                                  Expanded(
+                                                    child: Column(
+                                                      children: [
+                                                        Text(
+                                                          'اسم المادة',
+                                                        ),
+                                                        Row(
+                                                          children: [
+                                                            if (i % 2 == 0)
+                                                              Text(
+                                                                  '${i == 0
+                                                                      ? 18
+                                                                      : i *
+                                                                      Random()
+                                                                          .nextInt(
+                                                                          100)} \$',
+                                                                  style: TextStyle(
+                                                                    decoration:
+                                                                    TextDecoration
+                                                                        .lineThrough,
+                                                                  )),
+                                                            SizedBox(
+                                                              width: 8,
+                                                            ),
+                                                            Text(
+                                                                '${i == 0
+                                                                    ? 15
+                                                                    : i *
+                                                                    Random()
+                                                                        .nextInt(
+                                                                        100)} \$',
+                                                                style: TextStyle(
+                                                                    fontSize: 16,
+                                                                    fontWeight:
+                                                                    FontWeight
+                                                                        .bold)),
+                                                          ],
+                                                        ),
+                                                        TextButton.icon(
+                                                          icon: Image.asset(
+                                                            'assets/images/add_to_cart.png',
+                                                            width: 22,
+                                                          ),
+                                                          onPressed: () {},
+                                                          label:
+                                                          Text('أضف إلى السلة'),
+                                                        )
+                                                      ],
+                                                      mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                      crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: Container(
+                                  clipBehavior: Clip.antiAlias,
+                                  height: 275,
+                                  margin: EdgeInsets.all(8),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(
+                                          ThemeConfig.radius8),
+                                      color: Theme
+                                          .of(context)
+                                          .colorScheme
+                                          .primary
+                                          .withOpacity(0.2)),
+                                  child: Column(
+                                    children: [
+                                      Expanded(
+                                          flex: 2,
+                                          child: ClipRRect(
+                                            borderRadius: BorderRadius.only(
+                                                topLeft: Radius.circular(
+                                                    ThemeConfig.radius8),
+                                                topRight: Radius.circular(
+                                                    ThemeConfig.radius8)),
+                                            child: Stack(
+                                              children: [
+                                                Positioned.fill(
+                                                  child: Image.network(
+                                                    products[
+                                                    products.length - 1 - i],
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                                Positioned(
+                                                    top: 8,
+                                                    left: 8,
+                                                    child: Container(
+                                                      padding: EdgeInsets.all(
+                                                          4),
+                                                      decoration: BoxDecoration(
+                                                          border: Border.all(
+                                                              color:
+                                                              Theme
+                                                                  .of(context)
                                                                   .colorScheme
                                                                   .secondary,
-                                                          width: 0.5),
-                                                      color: Theme.of(context)
-                                                          .colorScheme
-                                                          .secondary
-                                                          .withOpacity(0.6),
-                                                      shape: BoxShape.circle),
-                                                  child: InkWell(
-                                                      borderRadius:
+                                                              width: 0.5),
+                                                          color: Theme
+                                                              .of(context)
+                                                              .colorScheme
+                                                              .secondary
+                                                              .withOpacity(0.6),
+                                                          shape: BoxShape
+                                                              .circle),
+                                                      child: InkWell(
+                                                          borderRadius:
                                                           BorderRadius.circular(
                                                               ThemeConfig
                                                                   .radius16),
-                                                      child: Image.asset(
-                                                        'assets/images/crown_outline.png',
-                                                        color: Theme.of(context)
-                                                            .colorScheme
-                                                            .onPrimary,
-                                                        height: 22,
-                                                      )),
-                                                ))
-                                          ],
-                                        ),
-                                      )),
-                                  Expanded(
-                                    child: Stack(
-                                      children: [
-                                        Transform.translate(
-                                          offset: Offset(0, -8),
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .onPrimary,
-                                                borderRadius:
+                                                          child: Image.asset(
+                                                            'assets/images/crown_outline.png',
+                                                            color: Theme
+                                                                .of(context)
+                                                                .colorScheme
+                                                                .onPrimary,
+                                                            height: 22,
+                                                          )),
+                                                    ))
+                                              ],
+                                            ),
+                                          )),
+                                      Expanded(
+                                        child: Stack(
+                                          children: [
+                                            Transform.translate(
+                                              offset: Offset(0, -8),
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                    color: Theme
+                                                        .of(context)
+                                                        .colorScheme
+                                                        .onPrimary,
+                                                    borderRadius:
                                                     BorderRadius.circular(
                                                         ThemeConfig.radius8)),
-                                          ),
-                                        ),
-                                        Container(
-                                          decoration: BoxDecoration(
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .onPrimary,
-                                              borderRadius:
+                                              ),
+                                            ),
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                  color: Theme
+                                                      .of(context)
+                                                      .colorScheme
+                                                      .onPrimary,
+                                                  borderRadius:
                                                   BorderRadius.circular(
                                                       ThemeConfig.radius8)),
-                                          child: Row(
-                                            children: [
-                                              SizedBox(
-                                                width: 8,
-                                              ),
-                                              Expanded(
-                                                child: Column(
-                                                  children: [
-                                                    Text(
-                                                      'اسم مادة طويل',
-                                                    ),
-                                                    Row(
+                                              child: Row(
+                                                children: [
+                                                  SizedBox(
+                                                    width: 8,
+                                                  ),
+                                                  Expanded(
+                                                    child: Column(
                                                       children: [
-                                                        if (i % 2 != 0)
-                                                          Text('150\$',
-                                                              style: TextStyle(
-                                                                decoration:
+                                                        Text(
+                                                          'اسم مادة طويل',
+                                                        ),
+                                                        Row(
+                                                          children: [
+                                                            if (i % 2 != 0)
+                                                              Text('150\$',
+                                                                  style: TextStyle(
+                                                                    decoration:
                                                                     TextDecoration
                                                                         .lineThrough,
-                                                              )),
-                                                        SizedBox(
-                                                          width: 8,
-                                                        ),
-                                                        Text(
-                                                            '${Random().nextInt(100)} \$',
-                                                            style: TextStyle(
-                                                                fontSize: 16,
-                                                                fontWeight:
+                                                                  )),
+                                                            SizedBox(
+                                                              width: 8,
+                                                            ),
+                                                            Text(
+                                                                '${Random()
+                                                                    .nextInt(
+                                                                    100)} \$',
+                                                                style: TextStyle(
+                                                                    fontSize: 16,
+                                                                    fontWeight:
                                                                     FontWeight
                                                                         .bold)),
-                                                      ],
-                                                    ),
-                                                    TextButton.icon(
-                                                      icon: Image.asset(
-                                                        'assets/images/add_to_cart.png',
-                                                        width: 22,
-                                                      ),
-                                                      onPressed: () {},
-                                                      label:
+                                                          ],
+                                                        ),
+                                                        TextButton.icon(
+                                                          icon: Image.asset(
+                                                            'assets/images/add_to_cart.png',
+                                                            width: 22,
+                                                          ),
+                                                          onPressed: () {},
+                                                          label:
                                                           Text('أضف إلى السلة'),
-                                                    )
-                                                  ],
-                                                  mainAxisAlignment:
+                                                        )
+                                                      ],
+                                                      mainAxisAlignment:
                                                       MainAxisAlignment.start,
-                                                  crossAxisAlignment:
+                                                      crossAxisAlignment:
                                                       CrossAxisAlignment.start,
-                                                ),
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
-                                            ],
-                                          ),
+                                            ),
+                                          ],
                                         ),
-                                      ],
-                                    ),
-                                  )
-                                ],
+                                      )
+                                    ],
+                                  ),
+                                ),
                               ),
-                            ),
+                            ],
                           ),
-                        ],
-                      ),
-                  ],
-                ),
-              ))
+                      ],
+                    ),
+                  ))
             ],
           ),
         ));

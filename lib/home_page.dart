@@ -1,6 +1,8 @@
 import 'dart:math';
 
+import 'package:atea_design/Widgets/main_app_bar.dart';
 import 'package:atea_design/cart_page.dart';
+import 'package:atea_design/locations_page.dart';
 import 'package:atea_design/materials_page.dart';
 import 'package:atea_design/orders_page.dart';
 import 'package:atea_design/product_page.dart';
@@ -97,8 +99,8 @@ class _HomePageState extends State<HomePage> {
 
             /// Profile
             SalomonBottomBarItem(
-              icon: Icon(Icons.notifications),
-              title: Text("الإشعارات"),
+              icon: Icon(Icons.map_sharp),
+              title: Text("العناوين"),
               selectedColor: Colors.red,
             ),
           ],
@@ -109,10 +111,7 @@ class _HomePageState extends State<HomePage> {
             Home(),
             Favorites(),
             OrdersPage(),
-            Container(
-                child: Center(
-              child: Text('الإشعارات'),
-            ))
+            LocationsPage()
           ],
           controller: pageController,
         ));
@@ -136,44 +135,7 @@ class _FavoritesState extends State<Favorites> {
           const SizedBox(
             height: 35,
           ),
-          Padding(
-            padding: EdgeInsets.only(top: 8, bottom: 8),
-            child: Row(
-              children: [
-                CircleAvatar(
-                  radius: 22,
-                  backgroundImage: NetworkImage(
-                    'https://d3r4f9ursifuvh.cloudfront.net/cms/images/marketing-manager/og/Junger_Mann_im_Anzug_im_B%C3%BCro.jpg',
-                  ),
-                ),
-                Spacer(),
-                Text('المفضلة',
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                Spacer(),
-                Stack(
-                  clipBehavior: Clip.none,
-                  children: [
-                    Image.asset('assets/images/cart.png', height: 28),
-                    Positioned(
-                      top: -10,
-                      right: -10,
-                      child: Container(
-                        padding: EdgeInsets.all(2),
-                        child: Text('26',
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 10)),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.red,
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ],
-            ),
-          ),
+          MainAppBar(title: 'المفضلة'),
           SizedBox(
             height: 8,
           ),
@@ -537,52 +499,7 @@ class _HomeState extends State<Home> {
             const SizedBox(
               height: 35,
             ),
-            Padding(
-              padding: EdgeInsets.only(top: 8, bottom: 8),
-              child: Row(
-                children: [
-                  CircleAvatar(
-                    radius: 22,
-                    backgroundImage: NetworkImage(
-                      'https://d3r4f9ursifuvh.cloudfront.net/cms/images/marketing-manager/og/Junger_Mann_im_Anzug_im_B%C3%BCro.jpg',
-                    ),
-                  ),
-                  Spacer(),
-                  Text('الرئيسية',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                  Spacer(),
-                  InkResponse(
-                    onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return CartPage();
-                      }));
-                    },
-                    child: Stack(
-                      clipBehavior: Clip.none,
-                      children: [
-                        Image.asset('assets/images/cart.png', height: 28),
-                        Positioned(
-                          top: -10,
-                          right: -10,
-                          child: Container(
-                            padding: EdgeInsets.all(2),
-                            child: Text('26',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 10)),
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.red,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            MainAppBar(title: 'الرئيسية'),
             SizedBox(
               height: 8,
             ),
@@ -1439,7 +1356,8 @@ class _HomeState extends State<Home> {
                             Navigator.pop(context);
                           },
                           icon: Icon(Icons.close, color: Colors.red),
-                          label: Text('إلغاء', style: TextStyle(color: Colors.red))),
+                          label: Text('إلغاء',
+                              style: TextStyle(color: Colors.red))),
                     ],
                   )
                 ],
