@@ -1,7 +1,6 @@
 import 'package:atea_design/home_page.dart';
 import 'package:atea_design/theme_config.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({super.key});
@@ -16,6 +15,103 @@ class _CartPageState extends State<CartPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('سلة المشتريات'),
+        actions: [
+          TextButton.icon(
+            icon: Icon(Icons.check),
+            label: Text('تأكيد الطلب'),
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                        title: Text('تأكيد الطلب'),
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Row(
+                              children: [
+                                Text('التاريخ',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .outline)),
+                                SizedBox(
+                                  width: 16,
+                                ),
+                                Text('12/12/2023',
+                                    style: TextStyle(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .secondary,
+                                    )),
+                              ],
+                            ),
+                            SizedBox(height: 8),
+                            Row(
+                              children: [
+                                Text('المجموع',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .outline)),
+                                SizedBox(
+                                  width: 16,
+                                ),
+                                Text('81.00 \$',
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .secondary,
+                                        fontWeight: FontWeight.bold)),
+                              ],
+                            ),
+                            SizedBox(height: 16),
+                            TextField(
+                              maxLines: 2,
+                              decoration: InputDecoration(
+                                  isDense: true,
+                                  label: Text('العنوان',
+                                      style: TextStyle(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .outline,
+                                          fontSize: 14)),
+                                  suffixIcon: Icon(Icons.location_on_outlined),
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(
+                                          ThemeConfig.radius8),
+                                      borderSide: BorderSide(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .primary,
+                                          width: 0.5))),
+                            ),
+                          ],
+                        ),
+                        actions: [
+                          TextButton.icon(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              icon: Icon(Icons.check),
+                              label: Text('تأكيد')),
+                          TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text('إلغاء الأمر',
+                                  style: TextStyle(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .error))),
+                        ],
+                      ));
+            },
+          ),
+          SizedBox(width: 8)
+        ],
       ),
       body: Column(
         children: [
@@ -23,8 +119,22 @@ class _CartPageState extends State<CartPage> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  Card(
+                  Container(
                     margin: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                        boxShadow: [
+                          BoxShadow(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .primary
+                                  .withOpacity(0.2),
+                              blurRadius: 5,
+                              spreadRadius: 2,
+                              offset: Offset(-1, 2))
+                        ],
+                        borderRadius:
+                            BorderRadius.circular(ThemeConfig.radius16)),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
@@ -449,8 +559,22 @@ class _CartPageState extends State<CartPage> {
                       ),
                     ),
                   ),
-                  Card(
+                  Container(
                     margin: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                        boxShadow: [
+                          BoxShadow(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .primary
+                                  .withOpacity(0.2),
+                              blurRadius: 5,
+                              spreadRadius: 2,
+                              offset: Offset(-1, 2))
+                        ],
+                        borderRadius:
+                            BorderRadius.circular(ThemeConfig.radius16)),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
@@ -673,22 +797,285 @@ class _CartPageState extends State<CartPage> {
                                     showDialog(
                                         context: context,
                                         builder: (context) => AlertDialog(
-                                          title: Text('حذف المنتج'),
-                                          content: Text(
-                                              'هل تريد حذف (فرن جاك) من سلة المشتريات؟'),
-                                          actions: [
-                                            TextButton(
-                                                onPressed: () {
-                                                  Navigator.pop(context);
-                                                },
-                                                child: Text('لا')),
-                                            TextButton(
-                                                onPressed: () {
-                                                  Navigator.pop(context);
-                                                },
-                                                child: Text('نعم')),
-                                          ],
-                                        ));
+                                              title: Text('حذف المنتج'),
+                                              content: Text(
+                                                  'هل تريد حذف (فرن جاك) من سلة المشتريات؟'),
+                                              actions: [
+                                                TextButton(
+                                                    onPressed: () {
+                                                      Navigator.pop(context);
+                                                    },
+                                                    child: Text('لا')),
+                                                TextButton(
+                                                    onPressed: () {
+                                                      Navigator.pop(context);
+                                                    },
+                                                    child: Text('نعم')),
+                                              ],
+                                            ));
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                        boxShadow: [
+                          BoxShadow(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .primary
+                                  .withOpacity(0.2),
+                              blurRadius: 5,
+                              spreadRadius: 2,
+                              offset: Offset(-1, 2))
+                        ],
+                        borderRadius:
+                            BorderRadius.circular(ThemeConfig.radius16)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                height: 100,
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .outlineVariant,
+                                        width: 0.5),
+                                    borderRadius: BorderRadius.circular(
+                                        ThemeConfig.radius16)),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(
+                                      ThemeConfig.radius16),
+                                  child: AspectRatio(
+                                      aspectRatio: 1 / 1,
+                                      child: Image.network(products[6],
+                                          fit: BoxFit.cover)),
+                                ),
+                              ),
+                              SizedBox(width: 16),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    SizedBox(height: 4),
+                                    Text('مكرويف جاك',
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold)),
+                                    SizedBox(height: 4),
+                                    Text(
+                                      'JAKOven',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .outlineVariant),
+                                    ),
+                                    SizedBox(height: 8),
+                                    Row(
+                                      children: [
+                                        Text('السعر',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .outline)),
+                                        SizedBox(
+                                          width: 16,
+                                        ),
+                                        Text('23.00 \$',
+                                            style: TextStyle(
+                                                fontSize: 18,
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .secondary,
+                                                fontWeight: FontWeight.bold)),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                          SizedBox(height: 20),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Container(
+                                  height: 45,
+                                  child: TextField(
+                                    decoration: InputDecoration(
+                                        isDense: true,
+                                        label: Text('السعر المخصص',
+                                            style: TextStyle(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .outline,
+                                                fontSize: 14)),
+                                        suffixIcon: Icon(Icons.attach_money),
+                                        hintStyle: TextStyle(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .outlineVariant),
+                                        enabledBorder: OutlineInputBorder(
+                                            borderRadius: BorderRadius.circular(
+                                                ThemeConfig.radius8),
+                                            borderSide: BorderSide(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .primary,
+                                                width: 0.5)),
+                                        border: OutlineInputBorder(
+                                            borderRadius: BorderRadius.circular(
+                                                ThemeConfig.radius8),
+                                            borderSide: BorderSide(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .outlineVariant,
+                                                width: 0.5))),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(width: 8),
+                              Expanded(
+                                child: Container(
+                                  height: 45,
+                                  child: TextField(
+                                    decoration: InputDecoration(
+                                        isDense: true,
+                                        label: Text('اسم المستلم',
+                                            style: TextStyle(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .outline,
+                                                fontSize: 14)),
+                                        suffixIcon: Icon(Icons.person_outline),
+                                        hintStyle: TextStyle(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .outlineVariant),
+                                        border: OutlineInputBorder(
+                                            borderRadius: BorderRadius.circular(
+                                                ThemeConfig.radius8),
+                                            borderSide: BorderSide(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .outlineVariant,
+                                                width: 0.5)),
+                                        enabledBorder: OutlineInputBorder(
+                                            borderRadius: BorderRadius.circular(
+                                                ThemeConfig.radius8),
+                                            borderSide: BorderSide(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .primary,
+                                                width: 0.5))),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                          SizedBox(height: 16),
+                          Row(
+                            children: [
+                              Expanded(
+                                flex: 2,
+                                child: Container(
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(
+                                          ThemeConfig.radius16),
+                                      border: Border.all(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .secondary,
+                                          width: 0.5)),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      InkResponse(
+                                        onTap: () {},
+                                        child: Icon(
+                                          Icons.add_circle_outline,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .secondary,
+                                        ),
+                                      ),
+                                      Text(
+                                        '1',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .secondary,
+                                            fontSize: 18),
+                                      ),
+                                      InkResponse(
+                                        onTap: () {},
+                                        child: Icon(
+                                          Icons.remove_circle_outline,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .secondary,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              SizedBox(width: 8),
+                              // delete button
+                              Expanded(
+                                child: TextButton.icon(
+                                  icon: Icon(Icons.delete_outline),
+                                  label: Text('حذف'),
+                                  style: ButtonStyle(
+                                      foregroundColor:
+                                          MaterialStateProperty.all(
+                                              Theme.of(context)
+                                                  .colorScheme
+                                                  .error),
+                                      shape: MaterialStateProperty.all(
+                                          RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                      ThemeConfig.radius8)))),
+                                  onPressed: () {
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) => AlertDialog(
+                                              title: Text('حذف المنتج'),
+                                              content: Text(
+                                                  'هل تريد حذف (فرن جاك) من سلة المشتريات؟'),
+                                              actions: [
+                                                TextButton(
+                                                    onPressed: () {
+                                                      Navigator.pop(context);
+                                                    },
+                                                    child: Text('لا')),
+                                                TextButton(
+                                                    onPressed: () {
+                                                      Navigator.pop(context);
+                                                    },
+                                                    child: Text('نعم')),
+                                              ],
+                                            ));
                                   },
                                 ),
                               ),
@@ -702,83 +1089,6 @@ class _CartPageState extends State<CartPage> {
               ),
             ),
           ),
-          Container(
-            decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.onPrimary,
-                boxShadow: [
-                  BoxShadow(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .primary
-                          .withOpacity(0.2),
-                      blurRadius: 10,
-                      spreadRadius: 1,
-                      offset: Offset(0, 0))
-                ],
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(ThemeConfig.radius32),
-                    topRight: Radius.circular(ThemeConfig.radius32))),
-            padding: const EdgeInsets.all(24),
-            child: Column(
-              children: [
-                //date and time
-                Row(
-                  children: [
-                    Text('المجموع',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context).colorScheme.outline)),
-                    SizedBox(
-                      width: 16,
-                    ),
-                    Text('81.00 \$',
-                        style: TextStyle(
-                            fontSize: 18,
-                            color: Theme.of(context).colorScheme.secondary,
-                            fontWeight: FontWeight.bold)),
-                    Spacer(),
-                    Text('11/12/2023',
-                        style: TextStyle(
-                            color: Theme.of(context).colorScheme.secondary,
-                            fontWeight: FontWeight.bold)),
-                  ],
-                ),
-                SizedBox(height: 16),
-                Container(
-                  height: 45,
-                  child: TextField(
-                    decoration: InputDecoration(
-                        isDense: true,
-                        label: Text('العنوان',
-                            style: TextStyle(
-                                color: Theme.of(context).colorScheme.outline,
-                                fontSize: 14)),
-                        suffixIcon: Icon(Icons.location_on_outlined),
-                        border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.circular(ThemeConfig.radius8),
-                            borderSide: BorderSide(
-                                color: Theme.of(context).colorScheme.primary,
-                                width: 0.5))),
-                  ),
-                ),
-                SizedBox(height: 8),
-                FilledButton.icon(
-                  icon: Icon(Icons.check),
-                  label: Text('تأكيد الطلب'),
-                  style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
-                          Theme.of(context).colorScheme.secondary),
-                      foregroundColor: MaterialStateProperty.all(
-                          Theme.of(context).colorScheme.onSecondary),
-                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.circular(ThemeConfig.radius8)))),
-                  onPressed: () {},
-                ),
-              ],
-            ),
-          )
         ],
       ),
     );
