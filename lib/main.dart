@@ -1,8 +1,11 @@
 import 'package:atea_design/color_schemes.g.dart';
+import 'package:atea_design/theme_config.dart';
 import 'package:atea_design/welcome_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+
 BuildContext? testContext;
+
 void main() {
   runApp(const MyApp());
 }
@@ -20,10 +23,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           fontFamily: 'Cairo',
           useMaterial3: true,
+          dialogTheme: DialogTheme(backgroundColor: Colors.white, elevation: 0),
           colorScheme: lightColorScheme),
       darkTheme: ThemeData(
           fontFamily: 'Cairo',
           useMaterial3: true,
+          dialogTheme: DialogTheme(backgroundColor: darkColorScheme.onPrimary, elevation: 0),
           colorScheme: darkColorScheme),
       localizationsDelegates: [
         GlobalCupertinoLocalizations.delegate,

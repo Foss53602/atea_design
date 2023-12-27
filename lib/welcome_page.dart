@@ -196,43 +196,64 @@ class _WelcomePageState extends State<WelcomePage> {
                     ],
                   ),
                   SizedBox(
-                    height: 30,
+                    height: 50,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
+                      SizedBox(width: 8,),
                       Stack(
                         children: [
                           Container(
                             child: Image.asset('assets/images/border.png'),
-                            height: 100,
-                            width: 100,
+                            height: 85,
+                            width: 85,
                           ),
-                          Image.asset('assets/images/instagram.png', height: 45)
+                          Image.asset('assets/images/instagram.png', height: 35)
                         ],
                         alignment: Alignment.center,
                       ),
-                      Stack(
-                        children: [
-                          Container(
-                            child: Image.asset('assets/images/border.png'),
-                            height: 100,
-                            width: 100,
-                          ),
-                          Image.asset('assets/images/facebook.png', height: 65)
-                        ],
-                        alignment: Alignment.center,
+                      Transform.translate(
+                        offset: Offset(15, -40),
+                        child: Stack(
+                          children: [
+                            Container(
+                              child: Image.asset('assets/images/border.png'),
+                              height: 85,
+                              width: 85,
+                            ),
+                            Image.asset('assets/images/facebook.png', height: 50)
+                          ],
+                          alignment: Alignment.center,
+                        ),
                       ),
-                      Stack(
-                        children: [
-                          Container(
-                            child: Image.asset('assets/images/border.png'),
-                            height: 100,
-                            width: 100,
-                          ),
-                          Image.asset('assets/images/telegram.png', height: 40)
-                        ],
-                        alignment: Alignment.center,
+                      Transform.translate(
+                        offset: Offset(20,0),
+                        child: Stack(
+                          children: [
+                            Container(
+                              child: Image.asset('assets/images/border.png'),
+                              height: 85,
+                              width: 85,
+                            ),
+                            Image.asset('assets/images/telegram.png', height: 30)
+                          ],
+                          alignment: Alignment.center,
+                        ),
+                      ),
+                      Transform.translate(
+                        offset: Offset(30, -40),
+                        child: Stack(
+                          children: [
+                            Container(
+                              child: Image.asset('assets/images/border.png'),
+                              height: 85,
+                              width: 85,
+                            ),
+                            Image.asset('assets/images/youtube.png', height: 30)
+                          ],
+                          alignment: Alignment.center,
+                        ),
                       ),
                     ],
                   ),

@@ -12,8 +12,13 @@ class LocationsPage extends StatefulWidget {
 class _LocationsPageState extends State<LocationsPage> {
   @override
   Widget build(BuildContext context) {
-    return Material(
-        child: Padding(
+    return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          child: Icon(Icons.add),
+        ),
+        body: Padding(
             padding: EdgeInsets.all(ThemeConfig.pagePadding),
             child: Column(
               children: [
