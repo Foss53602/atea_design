@@ -72,10 +72,13 @@ class _WelcomePageState extends State<WelcomePage> {
                 ],
               )),
             ),
-            Spacer(),
             SizedBox(
               height: 16,
             ),
+    Expanded(
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Row(
@@ -103,13 +106,13 @@ class _WelcomePageState extends State<WelcomePage> {
                 autoplay: true,
                 autoplayDelay: 10000,
                 customLayoutOption:
-                    CustomLayoutOption(startIndex: -1, stateCount: 3)
-                      ..addRotate([-45.0 / 180, 0.0, 45.0 / 180])
-                      ..addTranslate([
-                        Offset(-370.0, -40.0),
-                        Offset(0.0, 0.0),
-                        Offset(370.0, -40.0)
-                      ]),
+                CustomLayoutOption(startIndex: -1, stateCount: 3)
+                  ..addRotate([-45.0 / 180, 0.0, 45.0 / 180])
+                  ..addTranslate([
+                    Offset(-370.0, -40.0),
+                    Offset(0.0, 0.0),
+                    Offset(370.0, -40.0)
+                  ]),
                 duration: 1000,
                 itemWidth: 340.0,
                 itemHeight: 200.0,
@@ -128,7 +131,7 @@ class _WelcomePageState extends State<WelcomePage> {
                 itemCount: 4,
               ),
             ),
-            Spacer(),
+            // Spacer(),
             SizedBox(
               height: 8,
             ),
@@ -139,7 +142,7 @@ class _WelcomePageState extends State<WelcomePage> {
                   Container(
                       decoration: BoxDecoration(
                           borderRadius:
-                              BorderRadius.circular(ThemeConfig.radius8),
+                          BorderRadius.circular(ThemeConfig.radius8),
                           color: Theme.of(context).colorScheme.secondary),
                       width: 4,
                       height: 15),
@@ -165,7 +168,7 @@ class _WelcomePageState extends State<WelcomePage> {
                     color: Theme.of(context).colorScheme.primary,
                   ),
                   color:
-                      Theme.of(context).colorScheme.primary.withOpacity(0.2)),
+                  Theme.of(context).colorScheme.primary.withOpacity(0.2)),
               child: Column(
                 children: [
                   Row(
@@ -260,7 +263,9 @@ class _WelcomePageState extends State<WelcomePage> {
                 ],
               ),
             ),
-            Spacer(),
+            SizedBox(
+              height: 16,
+            ),
             SizedBox(
               width: 300,
               height: 50,
@@ -268,13 +273,13 @@ class _WelcomePageState extends State<WelcomePage> {
                   onPressed: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (BuildContext context) {
-                      return UserAreaPage();
-                    }));
+                          return UserAreaPage();
+                        }));
                   },
                   style: ButtonStyle(
                       shape: MaterialStateProperty.all(RoundedRectangleBorder(
                           borderRadius:
-                              BorderRadius.circular(ThemeConfig.radius8)))),
+                          BorderRadius.circular(ThemeConfig.radius8)))),
                   icon: Icon(Icons.login),
                   label: Text('تسجيل الدخول',
                       style: TextStyle(
@@ -282,7 +287,11 @@ class _WelcomePageState extends State<WelcomePage> {
                           fontSize: 18,
                           color: Theme.of(context).colorScheme.onPrimary))),
             ),
-            Spacer()
+            // Spacer()
+          ],
+        ),
+      ),
+    )
           ],
         ),
       ),

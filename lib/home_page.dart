@@ -1,4 +1,3 @@
-
 import 'package:atea_design/Widgets/main_app_bar.dart';
 import 'package:atea_design/Widgets/product_card.dart';
 import 'package:atea_design/favorates_page.dart';
@@ -123,264 +122,236 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: Padding(
-        padding: EdgeInsets.all(ThemeConfig.pagePadding),
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 35,
-            ),
-            MainAppBar(title: 'الرئيسية'),
-            SizedBox(
-              height: 8,
-            ),
-            Row(
-              children: [
-                InkResponse(
-                  onTap: () {
-                    _filter();
-                  },
-                  child: Container(
-                    width: 45,
-                    padding: EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                        color: Theme.of(context)
-                            .colorScheme
-                            .primary
-                            .withOpacity(0.8),
-                        borderRadius:
-                            BorderRadius.circular(ThemeConfig.radius16)),
-                    child: Image.asset('assets/images/filter.png',
-                        height: 20,
-                        width: 20,
-                        color: Theme.of(context).colorScheme.onPrimary),
-                  ),
+    return Scaffold(
+      drawer: _drawDrawer(),
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.all(ThemeConfig.pagePadding),
+          child: CustomScrollView(
+            slivers: [
+              SliverAppBar(
+                surfaceTintColor: Theme.of(context).colorScheme.surface,
+                scrolledUnderElevation: 0,
+                titleSpacing: 0,
+                title: MainAppBar(
+                  title: 'الرئيسية',
                 ),
-                SizedBox(
-                  width: 8,
-                ),
-                Expanded(
-                  child: TextField(
-                    decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Theme.of(context).colorScheme.onPrimary,
-                        isDense: true,
-                        contentPadding: EdgeInsets.all(8),
-                        suffixIcon: Icon(OctIcons.search_16),
-                        hintText: 'بحث..',
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .primary
-                                    .withOpacity(0.8),
-                                width: 0.5),
-                            borderRadius:
-                                BorderRadius.circular(ThemeConfig.radius16)),
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .primary
-                                    .withOpacity(0.8),
-                                width: 0.5),
-                            borderRadius:
-                                BorderRadius.circular(ThemeConfig.radius16))),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            Expanded(
-                child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 8,
-                  ),
-                  SizedBox(
-                    height: 175,
-                    child: Swiper(
-                      autoplay: true,
-                      duration: 1000,
-                      itemBuilder: (context, index) {
-                        return AspectRatio(
-                          aspectRatio: 2 / 1,
-                          child: ClipRRect(
-                            borderRadius:
-                                BorderRadius.circular(ThemeConfig.radius16),
-                            child: Image.asset(
-                              'assets/images/ad_${index + 1}.jpg',
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        );
-                      },
-                      itemCount: 4,
-                      viewportFraction: 0.8,
-                      scale: 0.9,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  Row(
-                    children: [
-                      Container(
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.circular(ThemeConfig.radius8),
-                              color: Theme.of(context).colorScheme.secondary),
-                          width: 4,
-                          height: 15),
-                      SizedBox(
-                        width: 8,
-                      ),
-                      Text('الأصناف',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 16)),
-                      Spacer(),
-                      TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          'عرض الكل',
-                          style: TextStyle(fontSize: 12),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                      height: 175,
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              for (var i = 0; i < 4; i++) getCategory(i)
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              for (var i = 1; i < 5; i++) getCategory(i + 3)
-                            ],
-                          ),
-                        ],
-                      )),
-                  Row(
-                    children: [
-                      Container(
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.circular(ThemeConfig.radius8),
-                              color: Theme.of(context).colorScheme.secondary),
-                          width: 4,
-                          height: 15),
-                      SizedBox(
-                        width: 8,
-                      ),
-                      Text('المواد',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 16)),
-                      Spacer(),
-                      TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          'عرض الكل',
-                          style: TextStyle(fontSize: 12),
-                        ),
-                      ),
-                    ],
-                  ),
-                  for (var i = 0; i < products.length / 2; i++)
-                    Row(
-                      children: [
-                        Expanded(
-                          child: GestureDetector(
-                              onTap: () {
-                                Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) {
-                                  return ProductPage(imagePath: products[i]);
-                                }));
-                              },
-                              child: ProductCard(
-                                imagePath: i == 1
-                                    ? 'https://s1.eestatic.com/2018/09/13/elandroidelibre/el_androide_libre_337730763_179714641_1706x960.jpg'
-                                    : products[i],
-                              )),
-                        ),
-                        Expanded(
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
-                                return ProductPage(imagePath: products[i]);
-                              }));
-                            },
-                            child: ProductCard(
-                              imagePath: i == 4
-                                  ? 'https://s1.eestatic.com/2018/09/13/elandroidelibre/el_androide_libre_337730763_179714641_1706x960.jpg'
-                                  : products[products.length - 1 - i],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  SizedBox(
-                    height: 4,
-                  ),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(ThemeConfig.radius16),
-                    child: AspectRatio(
-                        aspectRatio: 2 / 1,
-                        child: Image.network(
-                            fit: BoxFit.cover,
-                            'https://www.shutterstock.com/image-vector/arabic-typography-means-english-special-600nw-2272994421.jpg')),
-                  ),
-                  SizedBox(
-                    height: 4,
-                  ),
-                  for (var i = 0; i < products.length / 2; i++)
-                    Row(
-                      children: [
-                        Expanded(
-                          child: GestureDetector(
-                              onTap: () {
-                                Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) {
-                                  return ProductPage(imagePath: products[i]);
-                                }));
-                              },
-                              child: ProductCard(
-                                imagePath: i == 1
-                                    ? 'https://s1.eestatic.com/2018/09/13/elandroidelibre/el_androide_libre_337730763_179714641_1706x960.jpg'
-                                    : products[i],
-                              )),
-                        ),
-                        Expanded(
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
-                                return ProductPage(imagePath: products[i]);
-                              }));
-                            },
-                            child: ProductCard(
-                              imagePath: i == 4
-                                  ? 'https://s1.eestatic.com/2018/09/13/elandroidelibre/el_androide_libre_337730763_179714641_1706x960.jpg'
-                                  : products[products.length - 1 - i],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                ],
               ),
-            ))
-          ],
+              SliverPersistentHeader(
+                pinned: true,
+                delegate: _SliverDelegate(
+                  child: Container(
+                    height: 60,
+                    color: Theme.of(context).colorScheme.surface,
+                    child: Row(
+                      children: [
+                        InkResponse(
+                          onTap: () {
+                            _filter();
+                          },
+                          child: Container(
+                            width: 45,
+                            padding: EdgeInsets.all(12),
+                            decoration: BoxDecoration(
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .primary
+                                    .withOpacity(0.8),
+                                borderRadius: BorderRadius.circular(
+                                    ThemeConfig.radius16)),
+                            child: Image.asset('assets/images/filter.png',
+                                height: 20,
+                                width: 20,
+                                color: Theme.of(context).colorScheme.onPrimary),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 8,
+                        ),
+                        Expanded(
+                          child: TextField(
+                            decoration: InputDecoration(
+                                filled: true,
+                                fillColor:
+                                    Theme.of(context).colorScheme.onPrimary,
+                                isDense: true,
+                                contentPadding: EdgeInsets.all(8),
+                                suffixIcon: Icon(OctIcons.search_16),
+                                hintText: 'بحث..',
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primary
+                                            .withOpacity(0.8),
+                                        width: 0.5),
+                                    borderRadius: BorderRadius.circular(
+                                        ThemeConfig.radius16)),
+                                border: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primary
+                                            .withOpacity(0.8),
+                                        width: 0.5),
+                                    borderRadius: BorderRadius.circular(
+                                        ThemeConfig.radius16))),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              SliverList(
+                delegate: SliverChildListDelegate(
+                  [
+                    SizedBox(
+                      height: 16,
+                    ),
+                    SizedBox(
+                      height: 175,
+                      child: Swiper(
+                        autoplay: true,
+                        duration: 1000,
+                        itemBuilder: (context, index) {
+                          return AspectRatio(
+                            aspectRatio: 2 / 1,
+                            child: ClipRRect(
+                              borderRadius:
+                                  BorderRadius.circular(ThemeConfig.radius16),
+                              child: Image.asset(
+                                'assets/images/ad_${index + 1}.jpg',
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          );
+                        },
+                        itemCount: 4,
+                        viewportFraction: 0.8,
+                        scale: 0.9,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.circular(ThemeConfig.radius8),
+                                color: Theme.of(context).colorScheme.secondary),
+                            width: 4,
+                            height: 15),
+                        SizedBox(
+                          width: 8,
+                        ),
+                        Text('الأصناف',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 16)),
+                        Spacer(),
+                        TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            'عرض الكل',
+                            style: TextStyle(fontSize: 12),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                        height: 175,
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                for (var i = 0; i < 4; i++) getCategory(i)
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                for (var i = 1; i < 5; i++) getCategory(i + 3)
+                              ],
+                            ),
+                          ],
+                        )),
+                    Row(
+                      children: [
+                        Container(
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.circular(ThemeConfig.radius8),
+                                color: Theme.of(context).colorScheme.secondary),
+                            width: 4,
+                            height: 15),
+                        SizedBox(
+                          width: 8,
+                        ),
+                        Text('المواد',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 16)),
+                        Spacer(),
+                        TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            'عرض الكل',
+                            style: TextStyle(fontSize: 12),
+                          ),
+                        ),
+                      ],
+                    ),
+                    GridView.count(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      crossAxisCount:
+                          MediaQuery.of(context).size.width > 600 ? 4 : 2,
+                      mainAxisSpacing: 8,
+                      crossAxisSpacing: 8,
+                      childAspectRatio: 1/1.55,
+                      children: [
+                        for (var i = 0; i < 8; i++)
+                          ProductCard(
+                            imagePath: products[i],
+                          )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 4,
+                    ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(ThemeConfig.radius16),
+                      child: AspectRatio(
+                          aspectRatio: 3 / 1,
+                          child: Image.network(
+                              fit: BoxFit.cover,
+                              'https://www.shutterstock.com/image-vector/arabic-typography-means-english-special-600nw-2272994421.jpg')),
+                    ),
+                    SizedBox(
+                      height: 4,
+                    ),
+                    GridView.count(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      crossAxisCount:
+                      MediaQuery.of(context).size.width > 600 ? 4 : 2,
+                      mainAxisSpacing: 8,
+                      crossAxisSpacing: 8,
+                      childAspectRatio: 1/1.55,
+                      children: [
+                        for (var i = 8; i < 16; i++)
+                          ProductCard(
+                            imagePath: products[i],
+                          )
+                      ],
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -749,5 +720,165 @@ class _HomeState extends State<Home> {
             ),
           );
         });
+  }
+
+  Widget _drawDrawer() {
+    return Drawer(
+      child: SafeArea(
+        child: Column(
+          children: [
+            SizedBox(
+              height: 16,
+            ),
+            Row(
+              children: [
+                SizedBox(
+                  width: 16,
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'مرحباً',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 16),
+                      ),
+                      SizedBox(
+                        height: 4,
+                      ),
+                      Text(
+                        'محمد الأسمر',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 16),
+                      ),
+                      //email
+                      SizedBox(
+                        height: 4,
+                      ),
+                      Text(
+                        'mohammed7629@gmail.com',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 12),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  width: 16,
+                ),
+                CircleAvatar(
+                  radius: 30,
+                  backgroundImage: NetworkImage(
+                    'https://d3r4f9ursifuvh.cloudfront.net/cms/images/marketing-manager/og/Junger_Mann_im_Anzug_im_B%C3%BCro.jpg',
+                  ),
+                ),
+                SizedBox(
+                  width: 16,
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 16,
+            ),
+            Divider(
+              height: 0,
+            ),
+            Expanded(
+                child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Divider(
+                    height: 0,
+                  ),
+                  ListTile(
+                    onTap: () {},
+                    leading:
+                        Image.asset('assets/images/main_logo.jpg', width: 24),
+                    title: Text('من نحن'),
+                  ),
+                  ListTile(
+                    onTap: () {},
+                    leading: Icon(Icons.privacy_tip_outlined),
+                    title: Text('سياسة الخصوصية'),
+                  ),
+                  ListTile(
+                    onTap: () {},
+                    leading: Icon(Icons.security),
+                    title: Text('شروط الإستخدام'),
+                  ),
+                  Divider(
+                    height: 0,
+                  ),
+                  ListTile(
+                    onTap: () {},
+                    leading:
+                        Image.asset('assets/images/whatsapp.png', width: 24),
+                    title: Text('وتساب'),
+                  ),
+                  ListTile(
+                    onTap: () {},
+                    leading: Image.asset('assets/images/TikTok.png', width: 24),
+                    title: Text('تيك توك'),
+                  ),
+                  ListTile(
+                    onTap: () {},
+                    leading:
+                        Image.asset('assets/images/facebook.png', width: 26),
+                    title: Text('فيسبوك'),
+                  ),
+                  ListTile(
+                    onTap: () {},
+                    leading:
+                        Image.asset('assets/images/instagram.png', width: 24),
+                    title: Text('انستغرام'),
+                  ),
+                  ListTile(
+                    onTap: () {},
+                    leading:
+                        Image.asset('assets/images/youtube.png', width: 24),
+                    title: Text('يوتيوب'),
+                  ),
+                ],
+              ),
+            )),
+            Divider(
+              height: 0,
+            ),
+            ListTile(
+              onTap: () {},
+              leading: Icon(Icons.logout),
+              title: Text('تسجيل الخروج'),
+            ),
+            SizedBox(
+              height: 16,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _SliverDelegate extends SliverPersistentHeaderDelegate {
+  final Widget child;
+
+  _SliverDelegate({required this.child});
+
+  @override
+  double get minExtent => 60;
+
+  @override
+  double get maxExtent => 60;
+
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return child;
+  }
+
+  @override
+  bool shouldRebuild(_SliverDelegate oldDelegate) {
+    return false;
   }
 }
