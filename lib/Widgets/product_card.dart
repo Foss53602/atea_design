@@ -4,6 +4,8 @@ import 'package:atea_design/product_page.dart';
 import 'package:atea_design/theme_config.dart';
 import 'package:flutter/material.dart';
 
+import '../main.dart';
+
 class ProductCard extends StatefulWidget {
   final String imagePath;
 
@@ -44,9 +46,45 @@ class _ProductCardState extends State<ProductCard> {
                         fit: StackFit.expand,
                         children: [
                           Image.network(
-                            widget.imagePath,
+                            nextInt % 6 == 0
+                                ? youtubebackground:
+                            nextInt % 7 == 0
+                                ? ticktokbackground
+                                : widget.imagePath,
                             fit: BoxFit.cover,
                           ),
+                          if(nextInt % 6 == 0 || nextInt % 7 == 0)
+                            Positioned(
+                              bottom: 20,
+                              left: 0,
+                              right: 0,
+                              child: InkWell(
+                                borderRadius: BorderRadius.circular(
+                                    ThemeConfig.radius16),
+                                onTap: () {},
+                                child: Row(
+                                  children: [
+                                    const SizedBox(
+                                      width: 8,
+                                    ),
+                                    // open in youtube
+                                    Icon(
+                                      Icons.play_circle_fill,
+                                      color: Colors.white,
+                                    ),
+                                    const SizedBox(
+                                      width: 8,
+                                    ),
+                                    Text(
+                                      'مشاهدة الفيديو',
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
                           Positioned(
                               top: 8,
                               left: 8,

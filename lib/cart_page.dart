@@ -12,108 +12,12 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage> {
   var menuStyle = true;
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('سلة المشتريات'),
-        actions: [
-          TextButton.icon(
-            icon: Icon(Icons.check),
-            label: Text('تأكيد الطلب'),
-            onPressed: () {
-              showDialog(
-                  context: context,
-                  builder: (context) => AlertDialog(
-                        title: Text('تأكيد الطلب'),
-                        content: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Row(
-                              children: [
-                                Text('التاريخ',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .outline)),
-                                SizedBox(
-                                  width: 16,
-                                ),
-                                Text('12/12/2023',
-                                    style: TextStyle(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .secondary,
-                                    )),
-                              ],
-                            ),
-                            SizedBox(height: 8),
-                            Row(
-                              children: [
-                                Text('المجموع',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .outline)),
-                                SizedBox(
-                                  width: 16,
-                                ),
-                                Text('81.00 \$',
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .secondary,
-                                        fontWeight: FontWeight.bold)),
-                              ],
-                            ),
-                            SizedBox(height: 16),
-                            TextField(
-                              maxLines: 2,
-                              decoration: InputDecoration(
-                                  isDense: true,
-                                  label: Text('العنوان',
-                                      style: TextStyle(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .outline,
-                                          fontSize: 14)),
-                                  suffixIcon: Icon(Icons.location_on_outlined),
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(
-                                          ThemeConfig.radius8),
-                                      borderSide: BorderSide(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .primary,
-                                          width: 0.5))),
-                            ),
-                          ],
-                        ),
-                        actions: [
-                          TextButton.icon(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              icon: Icon(Icons.check),
-                              label: Text('تأكيد')),
-                          TextButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: Text('إلغاء الأمر',
-                                  style: TextStyle(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .error))),
-                        ],
-                      ));
-            },
-          ),
-          SizedBox(width: 8)
-        ],
       ),
       body: Column(
         children: [
@@ -210,6 +114,222 @@ class _CartPageState extends State<CartPage> {
                   menuStyle ? drawMenuStyle(context) : drawMenuCards(context),
             ),
           ),
+          Container(
+            margin: EdgeInsets.all(8),
+            padding: EdgeInsets.all(8),
+            decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.onPrimary,
+                boxShadow: [
+                  BoxShadow(
+                      color: Theme.of(context)
+                          .colorScheme
+                          .primary
+                          .withOpacity(0.2),
+                      blurRadius: 2,
+                      offset: Offset(-2, 2))
+                ],
+                borderRadius: BorderRadius.circular(ThemeConfig.radius16)),
+            child: Row(
+              children: [
+                SizedBox(width: 8),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('المدة المتبقية لتأكيد الطلب',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context).colorScheme.outline)),
+                      SizedBox(height: 8),
+                      Row(
+                        children: [
+                          Icon(Icons.timer,
+                              color: Theme.of(context).colorScheme.secondary),
+                          SizedBox(width: 8),
+                          Text('12:00:00',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color:
+                                      Theme.of(context).colorScheme.secondary)),
+                          SizedBox(width: 8),
+                          Text('ساعة',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color:
+                                      Theme.of(context).colorScheme.outline)),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+                FilledButton.icon(
+                  icon: Icon(Icons.check),
+                  label: Text('تأكيد الطلب'),
+                  onPressed: () {
+                    bool _setAttachment = false;
+                    showDialog(
+                        context: context,
+                        builder: (dialogContext) => AlertDialog(
+                              title: Text('تأكيد الطلب'),
+                              content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text('التاريخ',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .outline)),
+                                      SizedBox(
+                                        width: 16,
+                                      ),
+                                      Text('12/12/2023',
+                                          style: TextStyle(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .secondary,
+                                          )),
+                                    ],
+                                  ),
+                                  SizedBox(height: 8),
+                                  Row(
+                                    children: [
+                                      Text('المجموع',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .outline)),
+                                      SizedBox(
+                                        width: 16,
+                                      ),
+                                      Text('81.00 \$',
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .secondary,
+                                              fontWeight: FontWeight.bold)),
+                                    ],
+                                  ),
+                                  SizedBox(height: 16),
+                                  TextField(
+                                    maxLines: 2,
+                                    decoration: InputDecoration(
+                                        isDense: true,
+                                        label: Text('العنوان',
+                                            style: TextStyle(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .outline,
+                                                fontSize: 14)),
+                                        suffixIcon:
+                                            Icon(Icons.location_on_outlined),
+                                        border: OutlineInputBorder(
+                                            borderRadius: BorderRadius.circular(
+                                                ThemeConfig.radius8),
+                                            borderSide: BorderSide(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .primary,
+                                                width: 0.5))),
+                                  ),
+                                  // مرفق الإيصال
+                                  SizedBox(height: 16),
+                                  InkWell(
+                                    borderRadius: BorderRadius.circular(
+                                        ThemeConfig.radius16),
+                                    onTap: () {
+                                      setState(() {
+                                        _setAttachment = !_setAttachment;
+                                      });
+                                    },
+                                    child: Container(
+                                      height: 50,
+                                      decoration: _setAttachment
+                                          ? BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                      ThemeConfig.radius16),
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .secondary,
+                                            )
+                                          : BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                      ThemeConfig.radius16),
+                                              border: Border.all(
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .outlineVariant,
+                                                  width: 0.5)),
+                                      child: _setAttachment
+                                          ? Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                                Text('تم إرفاق الإيصال',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color: Theme.of(context)
+                                                            .colorScheme
+                                                            .onSecondary)),
+                                                SizedBox(width: 8),
+                                                Icon(Icons.check,
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .onSecondary),
+                                              ],
+                                            )
+                                          : Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                                Text('مرفق الإيصال',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color: Theme.of(context)
+                                                            .colorScheme
+                                                            .secondary)),
+                                                SizedBox(width: 8),
+                                                Icon(Icons.attach_file_outlined,
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .secondary),
+                                              ],
+                                            ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              actions: [
+                                TextButton.icon(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    icon: Icon(Icons.check),
+                                    label: Text('تأكيد')),
+                                TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text('إلغاء الأمر',
+                                        style: TextStyle(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .error))),
+                              ],
+                            ));
+                  },
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );

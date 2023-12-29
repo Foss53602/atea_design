@@ -3,6 +3,8 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
+import 'main.dart';
+
 class ProductPage extends StatefulWidget {
   final String imagePath;
 
@@ -32,15 +34,59 @@ class _ProductPageState extends State<ProductPage> {
                   SizedBox(
                     height: 400,
                     child: Swiper(
-                      itemCount: 2,
+                      itemCount: 4,
                       autoplay: true,
                       duration: 1000,
                       itemBuilder: (BuildContext context, int index) {
-                        return Image.network(
-                          index == 0
-                              ? 'https://img-lcwaikiki.mncdn.com/mnresize/1020/1360/pim/productimages/20221/5670566/l_20221-s2be69z8-j0m_a4.jpg'
-                              : 'https://img-lcwaikiki.mncdn.com/mnresize/1020/1360/pim/productimages/20221/5670566/l_20221-s2be69z8-j0m_u.jpg',
-                          fit: BoxFit.cover,
+                        return Stack(
+                          fit: StackFit.expand,
+                          children: [
+                            Image.network(
+                              index == 0
+                                  ? 'https://img-lcwaikiki.mncdn.com/mnresize/1020/1360/pim/productimages/20221/5670566/l_20221-s2be69z8-j0m_a4.jpg'
+                                  : index == 1
+                                      ? 'https://img-lcwaikiki.mncdn.com/mnresize/1020/1360/pim/productimages/20221/5670566/l_20221-s2be69z8-j0m_u.jpg'
+                                      : index == 2
+                                          ? youtubebackground
+                                          : ticktokbackground,
+                              fit: BoxFit.cover,
+                            ),
+                            index == 2 || index == 3
+                                ? Positioned(
+                                    bottom: 50,
+                                    left: 0,
+                                    right: 0,
+                                    child: InkWell(
+                                      borderRadius: BorderRadius.circular(
+                                          ThemeConfig.radius16),
+                                      onTap: () {},
+                                      child: Row(
+                                        children: [
+                                          const SizedBox(
+                                            width: 8,
+                                          ),
+                                          // open in youtube
+                                          Icon(
+                                            Icons.play_circle_fill,
+                                            color: Colors.white,
+                                            size: 50,
+                                          ),
+                                          const SizedBox(
+                                            width: 8,
+                                          ),
+                                          Text(
+                                            'مشاهدة الفيديو',
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 24,
+                                                fontWeight: FontWeight.bold),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                : Container(),
+                          ],
                         );
                       },
                       itemHeight: 400.0,
@@ -83,7 +129,8 @@ class _ProductPageState extends State<ProductPage> {
                             padding: EdgeInsets.all(4),
                             decoration: BoxDecoration(
                                 border: Border.all(
-                                    color: Theme.of(context).colorScheme.secondary,
+                                    color:
+                                        Theme.of(context).colorScheme.secondary,
                                     width: 0.5),
                                 color: Theme.of(context)
                                     .colorScheme
@@ -95,7 +142,8 @@ class _ProductPageState extends State<ProductPage> {
                                     BorderRadius.circular(ThemeConfig.radius16),
                                 child: Image.asset(
                                   'assets/images/crown_outline.png',
-                                  color: Theme.of(context).colorScheme.onPrimary,
+                                  color:
+                                      Theme.of(context).colorScheme.onPrimary,
                                   height: 22,
                                 )),
                           ),
@@ -104,7 +152,8 @@ class _ProductPageState extends State<ProductPage> {
                             padding: EdgeInsets.all(6),
                             decoration: BoxDecoration(
                                 border: Border.all(
-                                    color: Theme.of(context).colorScheme.primary,
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
                                     width: 0.5),
                                 color: Theme.of(context)
                                     .colorScheme
@@ -113,10 +162,11 @@ class _ProductPageState extends State<ProductPage> {
                                 shape: BoxShape.circle),
                             child: InkWell(
                                 borderRadius:
-                                BorderRadius.circular(ThemeConfig.radius16),
+                                    BorderRadius.circular(ThemeConfig.radius16),
                                 child: Icon(
                                   Icons.share,
-                                  color: Theme.of(context).colorScheme.onPrimary,
+                                  color:
+                                      Theme.of(context).colorScheme.onPrimary,
                                   size: 20,
                                 )),
                           ),

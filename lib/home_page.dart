@@ -310,7 +310,7 @@ class _HomeState extends State<Home> {
                           MediaQuery.of(context).size.width > 600 ? 4 : 2,
                       mainAxisSpacing: 8,
                       crossAxisSpacing: 8,
-                      childAspectRatio: 1/1.55,
+                      childAspectRatio: 1 / 1.55,
                       children: [
                         for (var i = 0; i < 8; i++)
                           ProductCard(
@@ -336,10 +336,10 @@ class _HomeState extends State<Home> {
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
                       crossAxisCount:
-                      MediaQuery.of(context).size.width > 600 ? 4 : 2,
+                          MediaQuery.of(context).size.width > 600 ? 4 : 2,
                       mainAxisSpacing: 8,
                       crossAxisSpacing: 8,
-                      childAspectRatio: 1/1.55,
+                      childAspectRatio: 1 / 1.55,
                       children: [
                         for (var i = 8; i < 16; i++)
                           ProductCard(
@@ -470,6 +470,28 @@ class _HomeState extends State<Home> {
     return '';
   }
 
+  String getSubCategoryNameByIndex(int index) {
+    switch (index) {
+      case 0:
+        return 'مجلس عربي';
+      case 1:
+        return 'سجاد';
+      case 2:
+        return 'غرف نوم';
+      case 3:
+        return 'كنباية';
+      case 4:
+        return 'كرسي مكتب';
+      case 5:
+        return 'حرامات';
+      case 6:
+        return 'مكيت';
+      case 7:
+        return 'جلايل';
+    }
+    return '';
+  }
+
   void _filter() {
     showModalBottomSheet(
         context: context,
@@ -487,121 +509,6 @@ class _HomeState extends State<Home> {
                   ),
                   SizedBox(
                     height: 8,
-                  ),
-                  Column(
-                    children: [
-                      Row(
-                        children: [
-                          Container(
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                      ThemeConfig.radius8),
-                                  color:
-                                      Theme.of(context).colorScheme.secondary),
-                              width: 4,
-                              height: 15),
-                          SizedBox(
-                            width: 8,
-                          ),
-                          Text(
-                            'الصنف',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 16),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 16,
-                      ),
-                      Row(
-                        children: [
-                          Container(
-                            width: 50,
-                            height: 50,
-                            padding: EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.circular(ThemeConfig.radius8),
-                              border: Border.all(
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .secondary
-                                      .withOpacity(0.2)),
-                            ),
-                            child: Center(
-                                child: Text(
-                              'الكل',
-                              style: TextStyle(
-                                  color:
-                                      Theme.of(context).colorScheme.secondary),
-                            )),
-                          ),
-                          SizedBox(
-                            width: 8,
-                          ),
-                          Expanded(
-                              child: SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: [
-                                for (var i = 0; i < 8; i++)
-                                  Container(
-                                    margin: EdgeInsets.only(right: 8),
-                                    height: 50,
-                                    padding: EdgeInsets.all(8),
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(
-                                            ThemeConfig.radius8),
-                                        border: i != 0 && i != 2
-                                            ? Border.all(
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .secondary
-                                                    .withOpacity(0.2),
-                                                width: 0.5)
-                                            : null,
-                                        color: i == 0 || i == 2
-                                            ? Theme.of(context)
-                                                .colorScheme
-                                                .secondary
-                                                .withOpacity(0.2)
-                                            : null),
-                                    child: Center(
-                                        child: Row(
-                                      children: [
-                                        Image.asset(
-                                          'assets/images/$i.png',
-                                          color: i == 0 || i == 2
-                                              ? Theme.of(context)
-                                                  .colorScheme
-                                                  .secondary
-                                              : null,
-                                          width: 20,
-                                        ),
-                                        SizedBox(
-                                          width: 8,
-                                        ),
-                                        Text(
-                                          getImageNameByIndex(i),
-                                          style: TextStyle(
-                                              color: i == 0 || i == 2
-                                                  ? Theme.of(context)
-                                                      .colorScheme
-                                                      .secondary
-                                                  : null),
-                                        ),
-                                      ],
-                                    )),
-                                  ),
-                              ],
-                            ),
-                          ))
-                        ],
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 32,
                   ),
                   Column(
                     children: [
@@ -694,7 +601,168 @@ class _HomeState extends State<Home> {
                     ],
                   ),
                   SizedBox(
-                    height: 16,
+                    height: 32,
+                  ),
+                  Column(
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(
+                                      ThemeConfig.radius8),
+                                  color:
+                                      Theme.of(context).colorScheme.secondary),
+                              width: 4,
+                              height: 15),
+                          SizedBox(
+                            width: 8,
+                          ),
+                          Text(
+                            'الصنف',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 16),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: [
+                            for (var i = 0; i < 8; i++)
+                              Container(
+                                margin: EdgeInsets.only(right: 8),
+                                height: 40,
+                                padding: EdgeInsets.all(8),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(
+                                        ThemeConfig.radius8),
+                                    border: i != 0
+                                        ? Border.all(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .secondary
+                                                .withOpacity(0.2),
+                                            width: 0.5)
+                                        : null,
+                                    color: i == 0
+                                        ? Theme.of(context)
+                                            .colorScheme
+                                            .secondary
+                                            .withOpacity(0.2)
+                                        : null),
+                                child: Center(
+                                    child: Row(
+                                  children: [
+                                    Image.asset(
+                                      'assets/images/$i.png',
+                                      color: i == 0
+                                          ? Theme.of(context)
+                                              .colorScheme
+                                              .secondary
+                                          : null,
+                                      width: 20,
+                                    ),
+                                    SizedBox(
+                                      width: 8,
+                                    ),
+                                    Text(
+                                      getImageNameByIndex(i),
+                                      style: TextStyle(
+                                          color: i == 0
+                                              ? Theme.of(context)
+                                                  .colorScheme
+                                                  .secondary
+                                              : null),
+                                    ),
+                                  ],
+                                )),
+                              ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      Row(
+                        children: [
+                          SizedBox(width: 8,),
+                          Container(
+                            width: 50,
+                            height: 40,
+                            padding: EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.circular(ThemeConfig.radius8),
+                              border: Border.all(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .secondary
+                                      .withOpacity(0.2)),
+                            ),
+                            child: Center(
+                                child: Text(
+                              'الكل',
+                              style: TextStyle(
+                                  color:
+                                      Theme.of(context).colorScheme.secondary),
+                            )),
+                          ),
+                          Expanded(
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                children: [
+                                  for (var i = 0; i < 8; i++)
+                                    Container(
+                                      margin: EdgeInsets.only(right: 8),
+                                      height: 40,
+                                      padding: EdgeInsets.all(8),
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(
+                                              ThemeConfig.radius8),
+                                          border:   i != 1
+                                              ? Border.all(
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .secondary
+                                                      .withOpacity(0.2),
+                                                  width: 0.5)
+                                              : null,
+                                          color:   i == 1
+                                              ? Theme.of(context)
+                                                  .colorScheme
+                                                  .secondary
+                                                  .withOpacity(0.2)
+                                              : null),
+                                      child: Center(
+                                          child: Row(
+                                        children: [
+                                          Text(
+                                            getSubCategoryNameByIndex(i),
+                                            style: TextStyle(
+                                                color:   i == 1
+                                                    ? Theme.of(context)
+                                                        .colorScheme
+                                                        .secondary
+                                                    : null),
+                                          ),
+                                        ],
+                                      )),
+                                    ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 64,
                   ),
                   ButtonBar(
                     mainAxisSize: MainAxisSize.max,
