@@ -35,26 +35,6 @@ class _MainAppBarState extends State<MainAppBar> {
                   ),
                 ),
               ),
-              Positioned(
-                top: -5,
-                right: -5,
-                child: Container(
-                  padding: EdgeInsets.all(2),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Theme.of(context).colorScheme.surface,
-                  ),
-                  child: Container(
-                    padding: EdgeInsets.all(4),
-                    child: Text('6',
-                        style: TextStyle(color: Colors.white, fontSize: 10)),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.red,
-                    ),
-                  ),
-                ),
-              )
             ],
           ),
           Spacer(),
@@ -62,26 +42,30 @@ class _MainAppBarState extends State<MainAppBar> {
             Text(widget.title!,
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
           Spacer(),
+          // notification icon
           InkResponse(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return CartPage();
-              }));
-            },
+            onTap: () {},
             child: Stack(
               clipBehavior: Clip.none,
               children: [
-                Image.asset('assets/images/cart.png', height: 28),
+                Icon(Icons.notifications_none_outlined, size: 28),
                 Positioned(
-                  top: -10,
-                  right: -10,
+                  top: -5,
+                  right: -5,
                   child: Container(
                     padding: EdgeInsets.all(2),
-                    child: Text('26',
-                        style: TextStyle(color: Colors.white, fontSize: 10)),
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Colors.red,
+                      color: Theme.of(context).colorScheme.surface,
+                    ),
+                    child: Container(
+                      padding: EdgeInsets.all(4),
+                      child: Text('6',
+                          style: TextStyle(color: Colors.white, fontSize: 10)),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.red,
+                      ),
                     ),
                   ),
                 )

@@ -3,6 +3,8 @@ import 'dart:math';
 import 'package:atea_design/product_page.dart';
 import 'package:atea_design/theme_config.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:vibration/vibration.dart';
 
 import '../main.dart';
 
@@ -18,6 +20,16 @@ class ProductCard extends StatefulWidget {
 }
 
 class _ProductCardState extends State<ProductCard> {
+  var count = 1;
+  late FToast fToast;
+
+  @override
+  void initState() {
+    fToast = FToast();
+    fToast.init(context);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     var nextInt = Random().nextInt(10);
@@ -47,20 +59,20 @@ class _ProductCardState extends State<ProductCard> {
                         children: [
                           Image.network(
                             nextInt % 6 == 0
-                                ? youtubebackground:
-                            nextInt % 7 == 0
-                                ? ticktokbackground
-                                : widget.imagePath,
+                                ? youtubebackground
+                                : nextInt % 7 == 0
+                                    ? ticktokbackground
+                                    : widget.imagePath,
                             fit: BoxFit.cover,
                           ),
-                          if(nextInt % 6 == 0 || nextInt % 7 == 0)
+                          if (nextInt % 6 == 0 || nextInt % 7 == 0)
                             Positioned(
                               bottom: 20,
                               left: 0,
                               right: 0,
                               child: InkWell(
-                                borderRadius: BorderRadius.circular(
-                                    ThemeConfig.radius16),
+                                borderRadius:
+                                    BorderRadius.circular(ThemeConfig.radius16),
                                 onTap: () {},
                                 child: Row(
                                   children: [
@@ -151,6 +163,8 @@ class _ProductCardState extends State<ProductCard> {
                             ),
                             Expanded(
                               child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
                                     'اسم المادة',
@@ -179,12 +193,12 @@ class _ProductCardState extends State<ProductCard> {
                                       'assets/images/add_to_cart.png',
                                       width: 22,
                                     ),
-                                    onPressed: () {},
+                                    onPressed: () async {
+                                      _onAddToCartPressed();
+                                    },
                                     label: Text('أضف إلى السلة'),
                                   )
                                 ],
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
                               ),
                             ),
                           ],
@@ -197,5 +211,381 @@ class _ProductCardState extends State<ProductCard> {
             ),
           )),
     );
+  }
+
+  void _onAddToCartPressed() {
+    showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return Container(
+            padding: EdgeInsets.all(ThemeConfig.pagePadding),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(
+                    height: 8,
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .outlineVariant,
+                                width: 0.5),
+                            borderRadius:
+                                BorderRadius.circular(ThemeConfig.radius16)),
+                        height: 100,
+                        child: ClipRRect(
+                          borderRadius:
+                              BorderRadius.circular(ThemeConfig.radius16),
+                          child: AspectRatio(
+                              aspectRatio: 1 / 1,
+                              child: Image.network(
+                                  'https://img-lcwaikiki.mncdn.com/mnresize/1020/1360/pim/productimages/20221/5670566/l_20221-s2be69z8-j0m_u.jpg',
+                                  fit: BoxFit.cover)),
+                        ),
+                      ),
+                      SizedBox(width: 16),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            SizedBox(height: 4),
+                            Text('بلوزة صوف',
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold)),
+                            SizedBox(height: 4),
+                            Text(
+                              'تركي - LC Waikiki',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .outlineVariant),
+                            ),
+                            SizedBox(height: 8),
+                            Row(
+                              children: [
+                                Text('السعر',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .outline)),
+                                SizedBox(
+                                  width: 16,
+                                ),
+                                Text('31.00 \$',
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .secondary,
+                                        fontWeight: FontWeight.bold)),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 32),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Text('المقاس',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color:
+                                      Theme.of(context).colorScheme.outline)),
+                          SizedBox(
+                            width: 16,
+                          ),
+                          Expanded(
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                children: [
+                                  for (int i = 0; i < 4; i++)
+                                    InkWell(
+                                      borderRadius: BorderRadius.circular(
+                                          ThemeConfig.radius16),
+                                      onTap: () {},
+                                      child: Container(
+                                        width: 50,
+                                        height: 35,
+                                        margin: EdgeInsets.only(left: 8),
+                                        child: Center(
+                                          child: Text(
+                                              i == 0
+                                                  ? 'S'
+                                                  : i == 1
+                                                      ? 'M'
+                                                      : i == 2
+                                                          ? 'L'
+                                                          : 'XL',
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: i == 0
+                                                      ? Theme.of(context)
+                                                          .colorScheme
+                                                          .onPrimary
+                                                      : Theme.of(context)
+                                                          .colorScheme
+                                                          .onSurfaceVariant)),
+                                        ),
+                                        decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(
+                                                ThemeConfig.radius16),
+                                            border: Border.all(
+                                              width: 0.2,
+                                              color: i == 0
+                                                  ? Colors.black
+                                                  : Theme.of(context)
+                                                      .colorScheme
+                                                      .outline,
+                                            ),
+                                            color: i == 0
+                                                ? Colors.black
+                                                : Theme.of(context)
+                                                    .colorScheme
+                                                    .surface),
+                                      ),
+                                    )
+                                ],
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                      SizedBox(height: 16),
+                      Row(
+                        children: [
+                          Text('اللون',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color:
+                                      Theme.of(context).colorScheme.outline)),
+                          SizedBox(
+                            width: 32,
+                          ),
+                          Expanded(
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                children: [
+                                  for (int i = 0; i < 4; i++)
+                                    InkResponse(
+                                      onTap: () {},
+                                      child: Stack(
+                                        alignment: Alignment.center,
+                                        children: [
+                                          Container(
+                                            width: i == 1 ? 45 : 40,
+                                            height: i == 1 ? 45 : 40,
+                                            margin: EdgeInsets.only(left: 16),
+                                            child: i == 1
+                                                ? Center(
+                                                    child: Icon(
+                                                    Icons.check,
+                                                    color: Colors.white,
+                                                  ))
+                                                : null,
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              color: i == 0
+                                                  ? Colors.teal.withOpacity(0.1)
+                                                  : i == 1
+                                                      ? Colors.blueGrey
+                                                          .withOpacity(0.1)
+                                                      : i == 2
+                                                          ? Colors
+                                                              .deepPurpleAccent
+                                                              .withOpacity(0.1)
+                                                          : Colors.deepOrange
+                                                              .withOpacity(0.1),
+                                            ),
+                                          ),
+                                          Container(
+                                            width: i == 1 ? 35 : 30,
+                                            height: i == 1 ? 35 : 30,
+                                            margin: EdgeInsets.only(left: 16),
+                                            child: i == 1
+                                                ? Center(
+                                                    child: Icon(
+                                                    Icons.check,
+                                                    color: Colors.white,
+                                                  ))
+                                                : null,
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              color: i == 0
+                                                  ? Colors.teal
+                                                  : i == 1
+                                                      ? Colors.blueGrey
+                                                      : i == 2
+                                                          ? Colors
+                                                              .deepPurpleAccent
+                                                          : Colors.deepOrange,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                ],
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                      SizedBox(height: 8),
+                    ],
+                  ),
+                  SizedBox(height: 8),
+                  Row(
+                    children: [
+                      Text('الكمية',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context).colorScheme.outline)),
+                      SizedBox(
+                        width: 32,
+                      ),
+                      Container(
+                        width: 200,
+                        height: 50,
+                        decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.circular(ThemeConfig.radius16),
+                            border: Border.all(
+                                color: Theme.of(context).colorScheme.secondary,
+                                width: 0.5)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            InkResponse(
+                              onTap: () {
+                                setState(() {
+                                  count++;
+                                });
+                              },
+                              child: Icon(
+                                Icons.add_circle_outline,
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 32,
+                            ),
+                            Text(
+                              count.toString(),
+                              style: TextStyle(
+                                  color:
+                                      Theme.of(context).colorScheme.secondary,
+                                  fontSize: 18),
+                            ),
+                            const SizedBox(
+                              width: 32,
+                            ),
+                            InkResponse(
+                              onTap: () {
+                                setState(() {
+                                  if (count > 1) {
+                                    count--;
+                                  }
+                                });
+                              },
+                              child: Icon(
+                                Icons.remove_circle_outline,
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 8,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 32),
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Expanded(
+                        flex: 2,
+                        child: FilledButton.icon(
+                            onPressed: () {
+                              Navigator.pop(context);
+                              Future.delayed(const Duration(milliseconds: 500))
+                                  .then((value) async {
+                                cartItemsCountController!
+                                    .forward()
+                                    .then((value) {
+                                  cartItemsCountController!.reset();
+                                });
+                                var hasVibrator = await Vibration.hasVibrator();
+                                if (hasVibrator != null && hasVibrator) {
+                                  Vibration.vibrate();
+                                }
+                                listenableValue.value =
+                                    listenableValue.value + 1;
+                              });
+                              Widget toast = Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 24.0, vertical: 12.0),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(25.0),
+                                  color: Colors.green,
+                                ),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Icon(Icons.check, color: Colors.white),
+                                    SizedBox(
+                                      width: 12.0,
+                                    ),
+                                    Text("تم إضافة المنتج إلى السة",
+                                        style: TextStyle(color: Colors.white)),
+                                  ],
+                                ),
+                              );
+                              fToast.showToast(
+                                child: toast,
+                                gravity: ToastGravity.BOTTOM,
+                                toastDuration: Duration(seconds: 2),
+                              );
+                            },
+                            icon: Icon(Icons.check),
+                            label: Text('تأكيد')),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: TextButton.icon(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            icon: Icon(Icons.close, color: Colors.red),
+                            label: Text('إلغاء',
+                                style: TextStyle(color: Colors.red))),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          );
+        });
   }
 }

@@ -1,5 +1,6 @@
 import 'package:atea_design/Widgets/main_app_bar.dart';
 import 'package:atea_design/Widgets/product_card.dart';
+import 'package:atea_design/cart_page.dart';
 import 'package:atea_design/favorates_page.dart';
 import 'package:atea_design/locations_page.dart';
 import 'package:atea_design/materials_page.dart';
@@ -10,6 +11,10 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+import 'package:stylish_bottom_bar/model/bar_items.dart';
+import 'package:stylish_bottom_bar/stylish_bottom_bar.dart';
+
+import 'main.dart';
 
 List<String> products = [
   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_JADgLpGrzZPE8HdwMvUpQBPyWjnkAFGyKrUga3-VNtNjTITayieVHeTZThiYEh17-X0&usqp=CAU',
@@ -39,19 +44,80 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
   var _currentIndex = 0;
 
   var pageController = PageController();
+  Tween<double> scaleTween = Tween<double>(begin: 1.0, end: 1.4);
+
+
+  @override
+  void initState() {
+    cartItemsCountController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 300),
+    );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         drawer: Drawer(),
-        bottomNavigationBar: SalomonBottomBar(
+        floatingActionButtonLocation: FloatingActionButtonLocation.startDocked,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return CartPage();
+            }));
+          },
+          child: ValueListenableBuilder(
+            valueListenable: listenableValue,
+            builder: (context, value, widget) {
+              return SizedBox(
+                width: 25,
+                height: 25,
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    Image.asset('assets/images/cart.png'),
+                    Positioned(
+                      top: -10,
+                      right: -10,
+                      child: ScaleTransition(
+                        scale: scaleTween.animate(cartItemsCountController!),
+
+                        child: Container(
+                          padding: EdgeInsets.all(
+                              value.toString().length == 2 ? 2 : 4),
+                          child: Text(value.toString(),
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 10)),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.red,
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              );
+            },
+          ),
+        ),
+        bottomNavigationBar: StylishBottomBar(
+          option: BubbleBarOptions(
+            barStyle: BubbleBarStyle.horizotnal,
+            bubbleFillStyle: BubbleFillStyle.fill,
+          ),
+          fabLocation: StylishBarFabLocation.end,
+          hasNotch: true,
+          elevation: 0,
           currentIndex: _currentIndex,
           backgroundColor:
-              Theme.of(context).colorScheme.primary.withOpacity(0.1),
+              Theme.of(context).colorScheme.primary.withOpacity(0.2),
           onTap: (i) {
             setState(() {
               _currentIndex = i;
@@ -59,8 +125,7 @@ class _HomePageState extends State<HomePage> {
             pageController.jumpToPage(i);
           },
           items: [
-            /// Home
-            SalomonBottomBarItem(
+            BottomBarItem(
               icon: Image.asset(
                 'assets/images/home.png',
                 width: 20,
@@ -71,20 +136,21 @@ class _HomePageState extends State<HomePage> {
               title: Text("الرئيسية"),
               selectedColor: Colors.black,
             ),
-            SalomonBottomBarItem(
+            BottomBarItem(
               icon: Image.asset(
                 'assets/images/crown.png',
-                width: 26,
+                height: 30,
                 color: _currentIndex == 1
                     ? Colors.amber
                     : Theme.of(context).colorScheme.onBackground,
               ),
-              title: Text("المفضلة"),
+              title: Text(
+                "المفضلة",
+                style: TextStyle(fontSize: 13),
+              ),
               selectedColor: Theme.of(context).colorScheme.secondary,
             ),
-
-            /// Search
-            SalomonBottomBarItem(
+            BottomBarItem(
               icon: Image.asset(
                 'assets/images/orders.png',
                 width: 24,
@@ -95,9 +161,7 @@ class _HomePageState extends State<HomePage> {
               title: Text("الطلبيات"),
               selectedColor: Colors.orange,
             ),
-
-            /// Profile
-            SalomonBottomBarItem(
+            BottomBarItem(
               icon: Icon(Icons.map_sharp),
               title: Text("العناوين"),
               selectedColor: Colors.red,
@@ -689,7 +753,9 @@ class _HomeState extends State<Home> {
                       ),
                       Row(
                         children: [
-                          SizedBox(width: 8,),
+                          SizedBox(
+                            width: 8,
+                          ),
                           Container(
                             width: 50,
                             height: 40,
@@ -724,7 +790,7 @@ class _HomeState extends State<Home> {
                                       decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(
                                               ThemeConfig.radius8),
-                                          border:   i != 1
+                                          border: i != 1
                                               ? Border.all(
                                                   color: Theme.of(context)
                                                       .colorScheme
@@ -732,7 +798,7 @@ class _HomeState extends State<Home> {
                                                       .withOpacity(0.2),
                                                   width: 0.5)
                                               : null,
-                                          color:   i == 1
+                                          color: i == 1
                                               ? Theme.of(context)
                                                   .colorScheme
                                                   .secondary
@@ -744,7 +810,7 @@ class _HomeState extends State<Home> {
                                           Text(
                                             getSubCategoryNameByIndex(i),
                                             style: TextStyle(
-                                                color:   i == 1
+                                                color: i == 1
                                                     ? Theme.of(context)
                                                         .colorScheme
                                                         .secondary
