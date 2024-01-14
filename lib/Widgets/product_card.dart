@@ -526,9 +526,10 @@ class _ProductCardState extends State<ProductCard> {
                       Expanded(
                         flex: 2,
                         child: FilledButton.icon(
-                            onPressed: () {
+                            onPressed: () async {
                               Navigator.pop(context);
-                              Future.delayed(const Duration(milliseconds: 500))
+                              await Future.delayed(
+                                      const Duration(milliseconds: 500))
                                   .then((value) async {
                                 cartItemsCountController!
                                     .forward()
@@ -547,23 +548,23 @@ class _ProductCardState extends State<ProductCard> {
                                     horizontal: 24.0, vertical: 12.0),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(25.0),
-                                  color: Colors.green,
+                                  color: Colors.greenAccent,
                                 ),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    Icon(Icons.check, color: Colors.white),
+                                    Image.asset('assets/images/main_logo.jpg',
+                                        width: 40),
                                     SizedBox(
                                       width: 12.0,
                                     ),
-                                    Text("تم إضافة المنتج إلى السة",
-                                        style: TextStyle(color: Colors.white)),
+                                    Text("تم إضافة المنتج إلى السة"),
                                   ],
                                 ),
                               );
                               fToast.showToast(
                                 child: toast,
-                                gravity: ToastGravity.BOTTOM,
+                                gravity: ToastGravity.CENTER,
                                 toastDuration: Duration(seconds: 2),
                               );
                             },

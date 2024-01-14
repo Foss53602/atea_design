@@ -366,7 +366,7 @@ class _UserAreaPageState extends State<UserAreaPage> {
         builder: (context) {
           return AlertDialog(
             title: const Text('تم تسجيل الدخول بنجاح'),
-            content: Lottie.asset('assets/lotties/success.json',
+            content: Lottie.asset('assets/lotties/success_new.json',
                 repeat: false, width: 100, height: 100),
           );
         });

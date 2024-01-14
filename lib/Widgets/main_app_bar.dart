@@ -1,4 +1,5 @@
 import 'package:atea_design/cart_page.dart';
+import 'package:atea_design/notification_page.dart';
 import 'package:atea_design/profile_page.dart';
 import 'package:flutter/material.dart';
 
@@ -44,7 +45,11 @@ class _MainAppBarState extends State<MainAppBar> {
           Spacer(),
           // notification icon
           InkResponse(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return NotificationPage();
+              }));
+            },
             child: Stack(
               clipBehavior: Clip.none,
               children: [

@@ -1,3 +1,4 @@
+import 'package:atea_design/cart_page.dart';
 import 'package:atea_design/theme_config.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
@@ -441,16 +442,97 @@ class _ProductPageState extends State<ProductPage> {
                                   'تمت الإضافة إلى السلة',
                                   textAlign: TextAlign.center,
                                 ),
-                                content: Lottie.asset(
-                                    'assets/lotties/success.json',
-                                    repeat: false,
-                                    width: 100,
-                                    height: 100),
+                                content: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Lottie.asset('assets/lotties/success_new.json',
+                                        repeat: false, width: 100, height: 100),
+                                    const SizedBox(
+                                      height: 16,
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        Navigator.pop(context);
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    CartPage()));
+                                      },
+                                      child: Container(
+                                        height: 50,
+                                        decoration: BoxDecoration(
+                                            boxShadow: [
+                                              BoxShadow(
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .primary
+                                                      .withOpacity(0.4),
+                                                  blurRadius: 10,
+                                                  spreadRadius: 2,
+                                                  offset: Offset(0, 5))
+                                            ],
+                                            borderRadius: BorderRadius.circular(
+                                                ThemeConfig.radius16),
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .primary),
+                                        child: Center(
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              SizedBox(
+                                                width: 25,
+                                                height: 25,
+                                                child: Stack(
+                                                  clipBehavior: Clip.none,
+                                                  children: [
+                                                    Image.asset(
+                                                        'assets/images/cart.png'),
+                                                    Positioned(
+                                                      top: -10,
+                                                      right: -10,
+                                                      child: Container(
+                                                        padding:
+                                                            EdgeInsets.all(4),
+                                                        child: Text('16',
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .white,
+                                                                fontSize: 10)),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          shape:
+                                                              BoxShape.circle,
+                                                          color: Colors.red,
+                                                        ),
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                width: 8,
+                                              ),
+                                              Text(
+                                                'عرض السلة',
+                                                style: TextStyle(
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .onPrimary,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               );
                             });
-                        Future.delayed(const Duration(milliseconds: 1500), () {
-                          Navigator.pop(context);
-                        });
                       },
                       child: Container(
                         height: 50,
@@ -513,6 +595,10 @@ class _ProductPageState extends State<ProductPage> {
                         ),
                         InkResponse(
                           onTap: () {
+                            if (count == 4) {
+                              _showAlertDialog(context);
+                              return;
+                            }
                             setState(() {
                               count++;
                             });
@@ -560,5 +646,30 @@ class _ProductPageState extends State<ProductPage> {
         ],
       ),
     );
+  }
+
+  void _showAlertDialog(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text(
+              'لا يمكنك طلب أكثر من 4 قطع من هذا المنتج',
+              textAlign: TextAlign.center,
+            ),
+            content: Transform.scale(
+              scale: 3,
+              child: Lottie.asset('assets/lotties/attention.json',
+                  width: 100, height: 100),
+            ),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text('حسناً'))
+            ],
+          );
+        });
   }
 }
