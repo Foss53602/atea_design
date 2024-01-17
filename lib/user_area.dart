@@ -370,7 +370,7 @@ class _UserAreaPageState extends State<UserAreaPage> {
                 repeat: false, width: 100, height: 100),
           );
         });
-    Future.delayed(const Duration(milliseconds: 1500), () {
+    Future.delayed(const Duration(milliseconds: 1300), () {
       Navigator.pop(context);
       Navigator.pushAndRemoveUntil(context,
           MaterialPageRoute(builder: (context) {

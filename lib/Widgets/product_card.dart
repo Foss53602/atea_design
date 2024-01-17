@@ -4,6 +4,7 @@ import 'package:atea_design/product_page.dart';
 import 'package:atea_design/theme_config.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:lottie/lottie.dart';
 import 'package:vibration/vibration.dart';
 
 import '../main.dart';
@@ -296,6 +297,7 @@ class _ProductCardState extends State<ProductCard> {
                   ),
                   SizedBox(height: 32),
                   Column(
+                    mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
@@ -452,6 +454,84 @@ class _ProductCardState extends State<ProductCard> {
                   SizedBox(height: 8),
                   Row(
                     children: [
+                      Expanded(
+                        child: Container(
+                          height: 45,
+                          child: TextField(
+                            decoration: InputDecoration(
+                                isDense: true,
+                                label: Text('اسم المستلم',
+                                    style: TextStyle(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .outline,
+                                        fontSize: 14)),
+                                suffixIcon: Icon(Icons.person_outline),
+                                hintStyle: TextStyle(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .outlineVariant),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(
+                                        ThemeConfig.radius8),
+                                    borderSide: BorderSide(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .outlineVariant,
+                                        width: 0.5)),
+                                enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(
+                                        ThemeConfig.radius8),
+                                    borderSide: BorderSide(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primary,
+                                        width: 0.5))),
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 8),
+                      Expanded(
+                        child: Container(
+                          height: 45,
+                          child: TextField(
+                            decoration: InputDecoration(
+                                isDense: true,
+                                label: Text('السعر المخصص',
+                                    style: TextStyle(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .outline,
+                                        fontSize: 14)),
+                                suffixIcon: Icon(Icons.attach_money),
+                                hintStyle: TextStyle(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .outlineVariant),
+                                enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(
+                                        ThemeConfig.radius8),
+                                    borderSide: BorderSide(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primary,
+                                        width: 0.5)),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(
+                                        ThemeConfig.radius8),
+                                    borderSide: BorderSide(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .outlineVariant,
+                                        width: 0.5))),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 16),
+                  Row(
+                    children: [
                       Text('الكمية',
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -527,46 +607,7 @@ class _ProductCardState extends State<ProductCard> {
                         flex: 2,
                         child: FilledButton.icon(
                             onPressed: () async {
-                              Navigator.pop(context);
-                              await Future.delayed(
-                                      const Duration(milliseconds: 500))
-                                  .then((value) async {
-                                cartItemsCountController!
-                                    .forward()
-                                    .then((value) {
-                                  cartItemsCountController!.reset();
-                                });
-                                var hasVibrator = await Vibration.hasVibrator();
-                                if (hasVibrator != null && hasVibrator) {
-                                  Vibration.vibrate();
-                                }
-                                listenableValue.value =
-                                    listenableValue.value + 1;
-                              });
-                              Widget toast = Container(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 24.0, vertical: 12.0),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(25.0),
-                                  color: Colors.greenAccent,
-                                ),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Image.asset('assets/images/main_logo.jpg',
-                                        width: 40),
-                                    SizedBox(
-                                      width: 12.0,
-                                    ),
-                                    Text("تم إضافة المنتج إلى السة"),
-                                  ],
-                                ),
-                              );
-                              fToast.showToast(
-                                child: toast,
-                                gravity: ToastGravity.CENTER,
-                                toastDuration: Duration(seconds: 2),
-                              );
+                              await onAddToCar(context);
                             },
                             icon: Icon(Icons.check),
                             label: Text('تأكيد')),
@@ -588,5 +629,59 @@ class _ProductCardState extends State<ProductCard> {
             ),
           );
         });
+  }
+
+  Future<void> onAddToCar(BuildContext buildContext) async {
+    {
+      Navigator.pop(context);
+      await Future.delayed(const Duration(milliseconds: 500))
+          .then((value) async {
+        cartItemsCountController!.forward().then((value) {
+          cartItemsCountController!.reset();
+        });
+        var hasVibrator = await Vibration.hasVibrator();
+        if (hasVibrator != null && hasVibrator) {
+          Vibration.vibrate();
+        }
+        listenableValue.value = listenableValue.value + 1;
+      });
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: const Text('تم إضافة المنتج إلى السلة'),
+              content: Lottie.asset('assets/lotties/success_new.json',
+                  repeat: false, width: 100, height: 100),
+            );
+          });
+      Future.delayed(const Duration(milliseconds: 1300), () {
+        Navigator.pop(context);
+      });
+      // old design
+      // Widget toast = Container(
+      //   padding: const EdgeInsets.symmetric(
+      //       horizontal: 24.0, vertical: 12.0),
+      //   decoration: BoxDecoration(
+      //     borderRadius: BorderRadius.circular(25.0),
+      //     color: Colors.greenAccent,
+      //   ),
+      //   child: Row(
+      //     mainAxisSize: MainAxisSize.min,
+      //     children: [
+      //       Image.asset('assets/images/main_logo.jpg',
+      //           width: 40),
+      //       SizedBox(
+      //         width: 12.0,
+      //       ),
+      //       Text("تم إضافة المنتج إلى السة"),
+      //     ],
+      //   ),
+      // );
+      // fToast.showToast(
+      //   child: toast,
+      //   gravity: ToastGravity.CENTER,
+      //   toastDuration: Duration(seconds: 2),
+      // );
+    }
   }
 }

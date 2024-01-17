@@ -445,90 +445,50 @@ class _ProductPageState extends State<ProductPage> {
                                 content: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    Lottie.asset('assets/lotties/success_new.json',
-                                        repeat: false, width: 100, height: 100),
+                                    Lottie.asset(
+                                        'assets/lotties/success_new.json',
+                                        repeat: false,
+                                        width: 100,
+                                        height: 100),
                                     const SizedBox(
                                       height: 16,
                                     ),
-                                    InkWell(
-                                      onTap: () {
-                                        Navigator.pop(context);
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    CartPage()));
-                                      },
-                                      child: Container(
-                                        height: 50,
-                                        decoration: BoxDecoration(
-                                            boxShadow: [
-                                              BoxShadow(
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .primary
-                                                      .withOpacity(0.4),
-                                                  blurRadius: 10,
-                                                  spreadRadius: 2,
-                                                  offset: Offset(0, 5))
-                                            ],
-                                            borderRadius: BorderRadius.circular(
-                                                ThemeConfig.radius16),
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .primary),
-                                        child: Center(
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
+                                    TextButton.icon(
+                                        icon: SizedBox(
+                                          width: 25,
+                                          height: 25,
+                                          child: Stack(
+                                            clipBehavior: Clip.none,
                                             children: [
-                                              SizedBox(
-                                                width: 25,
-                                                height: 25,
-                                                child: Stack(
-                                                  clipBehavior: Clip.none,
-                                                  children: [
-                                                    Image.asset(
-                                                        'assets/images/cart.png'),
-                                                    Positioned(
-                                                      top: -10,
-                                                      right: -10,
-                                                      child: Container(
-                                                        padding:
-                                                            EdgeInsets.all(4),
-                                                        child: Text('16',
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .white,
-                                                                fontSize: 10)),
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          shape:
-                                                              BoxShape.circle,
-                                                          color: Colors.red,
-                                                        ),
-                                                      ),
-                                                    )
-                                                  ],
+                                              Image.asset(
+                                                  'assets/images/cart.png'),
+                                              Positioned(
+                                                top: -10,
+                                                right: -10,
+                                                child: Container(
+                                                  padding: EdgeInsets.all(2),
+                                                  child: Text('16',
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize: 10)),
+                                                  decoration: BoxDecoration(
+                                                    shape: BoxShape.circle,
+                                                    color: Colors.red,
+                                                  ),
                                                 ),
-                                              ),
-                                              const SizedBox(
-                                                width: 8,
-                                              ),
-                                              Text(
-                                                'عرض السلة',
-                                                style: TextStyle(
-                                                    color: Theme.of(context)
-                                                        .colorScheme
-                                                        .onPrimary,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
+                                              )
                                             ],
                                           ),
                                         ),
-                                      ),
-                                    ),
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      CartPage()));
+                                        },
+                                        label: Text('عرض السلة'))
                                   ],
                                 ),
                               );
